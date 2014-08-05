@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LiquidCommunications</string>
+    <string name="action_settings">Settings</string>
+    <string name="import_button">Import</string>
+    <string name="liquid_text">LiquidText</string>
+    <string name="skip_button">No Thanks</string>
+    <string name="default_app_button">Set Default</string>
+    <string name="import_contacts">Import Contacts</string>
+    <string name="import_smsmms">Import Sms/Mms</string>
+    <string name="set_default"> Set as Default Messaging App </string>
+    <string name="dialog_contact_import">Would you like LiquidCommunications to import your current contact list for you?</string>
+    <string name="dialog_default_app">Would you like to set LiquidCommunication to be your default messaging app?</string>
+    <string name="dialog_smsmms_import">Would you like LiquidCommunications to import your current Sms/Mms conversations for you?</string>
+    <string name="title_activity_contact_importer">ContactImporter</string>
+    <string name="title_activity_sms_mms_importer">SmsMmsImporter</string>
+    <string name="title_activity_set_default_app">SetDefaultApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="sqlContacts">create table contacts (_id INTEGER primary key, LQ_Name TEXT, LQ_ContactPhoto BLOB, LQ_HasNumber INTEGER, LQ_Number TEXT, LQ_Email TEXT, LQ_HasContacted INTEGER, LQ_Contacted INTEGER, LQ_LastContacted DATE)</string>
+
+</resources>

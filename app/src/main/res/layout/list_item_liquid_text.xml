@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp">
+
+    <ImageView
+        android:id="@+id/imgContactBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:scaleX="1.44"
+        android:scaleY="1.25"
+        android:translationX="38dp"
+        android:translationY="4dp"
+        android:src="@drawable/bar_horizontal_silver"
+        android:clickable="true"
+        android:longClickable="true" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:layout_centerInParent="true"
+        android:id="@+id/relativeLayout"
+        android:clickable="false">
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtContactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="true"
+        android:paddingLeft="78dp"
+        android:paddingTop="6dp"
+        android:textColor="@color/contact_name"
+        android:textStyle="bold"
+        android:textSize="16dip"
+        android:layout_alignTop="@id/imgContactBackground"
+        android:layout_alignLeft="@id/imgContactBackground"
+        android:clickable="true"
+        android:longClickable="true"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/txtContactNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingRight="9dp"
+        android:textSize="16dip"
+        android:textStyle="normal"
+        android:textColorLink="@color/phone_number"
+        android:layout_alignRight="@id/imgContactBackground"
+        android:layout_alignTop="@+id/imgContactBackground"
+        android:maxLines="1"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/txtLastContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationY="-2dp"
+        android:paddingLeft="85dp"
+        android:paddingRight="15dp"
+        android:textSize="11dip"
+        android:layout_below="@id/txtContactNumber"
+        android:layout_alignLeft="@id/imgContactBackground"
+        android:textColor="@color/last_message"
+        android:clickable="true"
+        android:maxLines="2" />
+
+
+</RelativeLayout>
+
