@@ -55,8 +55,8 @@
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="@dimen/footer_button_width"
-            android:layout_height="@dimen/footer_Button_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Text"
             android:textStyle="bold"
             android:onClick="clear"
@@ -64,13 +64,14 @@
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewText"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"/>
 
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="70dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Email"
             android:textStyle="bold"
             android:onClick="clear"
@@ -78,25 +79,27 @@
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewEmail"
+            android:layout_toRightOf="@+id/btnNewText"
             android:layout_alignParentBottom="true"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="65dp"
-            android:layout_height="40dp"
-            android:text="Call"
+            android:layout_width="30dp"
+            android:layout_height="65dp"
+            android:text="@string/footer_call"
             android:textStyle="bold"
             android:onClick="clear"
             android:textSize="12pt"
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewCall"
+            android:layout_toLeftOf="@+id/btnNewSocial"
             android:layout_alignParentBottom="true"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="85dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Social"
             android:textStyle="bold"
             android:onClick="clear"
@@ -104,7 +107,8 @@
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewSocial"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
 
