@@ -37,14 +37,6 @@ public class LiquidManager extends Activity {
         mainPager.setCurrentItem(2);
         mainPager.setOnPageChangeListener(onPageChangeListener);
         Intent serviceSmsMms = new Intent(context, SmsMmsService.class);
-        Cursor cursor = getContentResolver().query(ContactProvider.contactUri, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            String avb = cursor.getString(1);
-            String tyb = cursor.getString(5);
-            String kfd = cursor.getString(3);
-        }
-
         context.startService(serviceSmsMms);
 
 
@@ -64,12 +56,16 @@ public class LiquidManager extends Activity {
                 Log.e("onPageScrolled", "pageSelected" + pageSelected + ",positionOffset:" + positionOffset + ",positionOffsetPixel:" + positionOffsetPixel);
                 previousState = mainPager.getCurrentItem();
 
-               if (previousState == 0 && positionOffset < .99){
-                   mainPager.setCurrentItem(3);
+               if (previousState == 0 ){//&& positionOffset < .99){
+
+                   mainPager.setCurrentItem(3, false);
                }
 
-               if (previousState == 4 && positionOffset > .01){
-                   mainPager.setCurrentItem(1);
+               if (previousState == 4 ){//&& positionOffset > .01){
+
+
+                   mainPager.setCurrentItem(1, false);
+
                }
 
             }
@@ -77,6 +73,10 @@ public class LiquidManager extends Activity {
             @Override
             public void onPageScrollStateChanged(int state) {
                 Log.e("onPageScrollStateChanged", "state:" + state);
+
+                if (previousState == 4){
+
+                }
 
           //      currentState = mainPager.getCurrentItem();
 

@@ -50,10 +50,6 @@ public class QuickConnectFragment extends Fragment {
 
         context = this.getActivity();
         View viewQC = inflater.inflate(R.layout.fragment_quick_connect, container, false);
-        //mylistView = (ListView) container.findViewById(R.id.contactListView);
-       // getContactInfo();
-       // QuickConnectAdapter quickConnectAdapter = new QuickConnectAdapter(this.getActivity(), R.layout.list_item_quick_connect, mylist);
-       // mylistView.setAdapter(quickConnectAdapter);
 
 
         return viewQC;
@@ -63,7 +59,7 @@ public class QuickConnectFragment extends Fragment {
     private void getContactInfo(){
 
 
-        Cursor cursor = context.getContentResolver().query(ContactProvider.contactUri,null,null,null,null);
+        Cursor cursor = context.getContentResolver().query(ContactProvider.contactUri,null,"LQ_HasContacted",null,"LQ_Contacted");
 
         while (cursor.moveToNext()){
 
