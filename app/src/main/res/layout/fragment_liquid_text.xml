@@ -44,93 +44,68 @@
         android:scrollbarAlwaysDrawVerticalTrack="false"
         android:fastScrollEnabled="false"
         android:layout_below="@+id/LMheader"
-        android:layout_above="@+id/btnNewText" />
+        android:layout_above="@+id/footer" />
 
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:background="#BF808285"
-        android:layout_below="@+id/contactListView">
+        android:background="#BF808285">
 
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="Text"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="12pt"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewText"
+            android:layout_alignParentBottom="true"/>
+
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:text="Email"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="12pt"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewEmail"
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="65dp"
+            android:layout_height="40dp"
+            android:text="Call"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="12pt"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewCall"
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="85dp"
+            android:layout_height="40dp"
+            android:text="Social"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="12pt"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewSocial"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="65dp"
-        android:layout_height="40dp"
-        android:text="Text"
-        android:textStyle="bold"
-        android:onClick="clear"
-        android:textSize="12pt"
-        android:background="@drawable/text_input_background"
-        android:textColor="@color/contact_name"
-        android:id="@+id/btnNewText"
-        android:translationY="-10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text="Email"
-        android:textStyle="bold"
-        android:onClick="clear"
-        android:textSize="12pt"
-        android:background="@drawable/text_input_background"
-        android:textColor="@color/contact_name"
-        android:id="@+id/btnNewEmail"
-        android:translationY="-10dp"
-        android:translationX="85dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="65dp"
-        android:layout_height="40dp"
-        android:text="Call"
-        android:textStyle="bold"
-        android:onClick="clear"
-        android:textSize="12pt"
-        android:background="@drawable/text_input_background"
-        android:textColor="@color/contact_name"
-        android:id="@+id/btnNewCall"
-        android:translationY="-10dp"
-        android:translationX="-100dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="85dp"
-        android:layout_height="40dp"
-        android:text="Social"
-        android:textStyle="bold"
-        android:onClick="clear"
-        android:textSize="12pt"
-        android:background="@drawable/text_input_background"
-        android:textColor="@color/contact_name"
-        android:id="@+id/btnNewSocial"
-        android:translationY="-10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-
-
-
 
 
 </RelativeLayout>
