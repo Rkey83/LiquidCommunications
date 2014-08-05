@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="1dp"
-    android:paddingRight="1dp"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
     android:scrollbars="none"
     android:scrollbarSize="0dp"
     tools:context=".ContactManager">
@@ -29,10 +25,33 @@
             android:layout_marginTop="2dp"
             android:textSize="11pt"
             android:textStyle="bold"
-            android:text="LiquidConnect"
+            android:text="@string/liquid_contacts"
             android:textAlignment="center"
             android:layout_centerHorizontal="true"/>
 
+        <TextView
+            android:id="@+id/liquidContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/sub_header_margin_top"
+            android:textColor="@color/header_sub_text"
+            android:textSize="@dimen/header_sub_text_size"
+            android:textStyle="bold"
+            android:text="@string/liquid_text"
+            android:layout_marginLeft="@dimen/sub_header_margin_horiz"/>
+
+        <TextView
+            android:id="@+id/QuickConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/header_sub_text"
+            android:layout_marginTop="@dimen/sub_header_margin_top"
+            android:textSize="@dimen/header_sub_text_size"
+            android:textStyle="bold"
+            android:text="@string/quick_connect"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
     </RelativeLayout>
 

@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="1dp"
-    android:paddingRight="1dp"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
     android:scrollbars="none"
     android:scrollbarSize="0dp"
     tools:context=".ContactManager">
@@ -21,9 +17,6 @@
             android:id="@+id/LiquidManagerHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:textColor="#BCBEC0"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
@@ -33,6 +26,29 @@
             android:textAlignment="center"
             android:layout_centerHorizontal="true"/>
 
+        <TextView
+            android:id="@+id/liquidContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/sub_header_margin_top"
+            android:textColor="@color/header_sub_text"
+            android:textSize="@dimen/header_sub_text_size"
+            android:textStyle="bold"
+            android:text="@string/quick_connect"
+            android:layout_marginLeft="@dimen/sub_header_margin_horiz"/>
+
+        <TextView
+            android:id="@+id/QuickConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/header_sub_text"
+            android:layout_marginTop="@dimen/sub_header_margin_top"
+            android:textSize="@dimen/header_sub_text_size"
+            android:textStyle="bold"
+            android:text="@string/liquid_contacts"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
     </RelativeLayout>
 
@@ -49,66 +65,79 @@
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="#BF808285">
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_text"
             android:textStyle="bold"
             android:onClick="clear"
-            android:textSize="12pt"
+            android:textSize="@dimen/footer_text_size"
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewText"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginLeft="@dimen/footer_margin"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentTop="true"/>
 
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_email"
             android:textStyle="bold"
             android:onClick="clear"
-            android:textSize="12pt"
+            android:textSize="@dimen/footer_text_size"
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewEmail"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginLeft="@dimen/footer_button_margin"
             android:layout_toRightOf="@+id/btnNewText"
             android:layout_alignParentBottom="true"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="30dp"
-            android:layout_height="65dp"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
             android:text="@string/footer_call"
             android:textStyle="bold"
             android:onClick="clear"
-            android:textSize="12pt"
+            android:textSize="@dimen/footer_text_size"
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewCall"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginRight="@dimen/footer_button_margin"
             android:layout_toLeftOf="@+id/btnNewSocial"
             android:layout_alignParentBottom="true"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Social"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_social"
             android:textStyle="bold"
             android:onClick="clear"
-            android:textSize="12pt"
+            android:textSize="@dimen/footer_text_size"
             android:background="@drawable/text_input_background"
             android:textColor="@color/contact_name"
             android:id="@+id/btnNewSocial"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginRight="@dimen/footer_margin"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"/>
+
     </RelativeLayout>
 
 

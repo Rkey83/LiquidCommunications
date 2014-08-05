@@ -3,13 +3,18 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    //header margins
+
+    //header dimensions
     <dimen name="sub_header_margin_horiz">6dp</dimen>
     <dimen name="sub_header_margin_top">8dp</dimen>
+    <dimen name="header_sub_text_size">6pt</dimen>
 
     //footer dimensions
-    <dimen name="footer_button_width">65dp</dimen>
+    <dimen name="footer_button_width">75dp</dimen>
     <dimen name="footer_Button_height">40dp</dimen>
     <dimen name="footer_margin">10dp</dimen>
+    <dimen name="footer_button_margin">20dp</dimen>
+
+    <dimen name="footer_text_size">10pt</dimen>
 
 </resources>
