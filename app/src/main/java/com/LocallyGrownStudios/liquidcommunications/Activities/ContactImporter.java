@@ -20,6 +20,10 @@ public class ContactImporter extends Activity implements View.OnClickListener{
 
     // Class objects
 
+    //// MARK DID THIS WORK
+
+
+
     static Context context, cntxContactImporter;
     Button btnImport, btnCancel;
     FirstRunCheck appFirstRun = new FirstRunCheck();
