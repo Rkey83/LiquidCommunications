@@ -66,8 +66,8 @@ public class QuickConnectFragment extends Fragment {
             ContactBean objContact = new ContactBean();
 
             String avb = cursor.getString(1);
-            String tyb = cursor.getString(5);
-            String kfd = cursor.getString(3);
+            String tyb = cursor.getString(4);
+            String kfd = cursor.getString(5);
             objContact.Nameset(avb);
             objContact.PhoneNoset(tyb);
             objContact.LastTextSet(kfd);

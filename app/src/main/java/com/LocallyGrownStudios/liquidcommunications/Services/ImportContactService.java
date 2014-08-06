@@ -153,6 +153,12 @@ public class ImportContactService extends Service {
 
                     }
 
+                    // Otherwise set Photo to null
+
+                    else {
+                        bytContactPhoto = null;
+                    }
+
                 // Check whether contact has been contacted
 
                 intTimesContacted = cursorPhone.getInt(cursorPhone.getColumnIndex(Phone.TIMES_CONTACTED));
@@ -176,6 +182,11 @@ public class ImportContactService extends Service {
                     strLastContacted = Converters.getDate(lnglastContacted, "dd/MM/yyyy hh:mm:ss.SSS");
                 }
 
+                // Otherwise set to 0
+                else {
+                    strLastContacted = null;
+                }
+
                 // Get Phone Number, Type and type, add to an Array List
 
                 strPhoneType = cursorPhone.getString(cursorPhone.getColumnIndex(Phone.TYPE));
@@ -194,6 +205,12 @@ public class ImportContactService extends Service {
                 // Set all values to the Array List and convert it to a String
                 arrNumbers = listPhoneNumber.toArray(new String[listPhoneNumber.size()]);
                 strAllNumbers = Converters.convertArrayToString(arrNumbers);
+            }
+            else {
+
+                // Otherwise if contact does not have a Number set to none
+                strAllNumbers = null;
+
             }
 
             // Close Phone Cursor and Open Email Cursor
@@ -219,6 +236,18 @@ public class ImportContactService extends Service {
                 strAllEmails = Converters.convertArrayToString(arrEmails);
             }
 
+            // Otherwise if contact does not have an Email, set to none
+            else {
+                strAllEmails = null;
+            }
+
+        } else {
+
+            // If contact does not have a Number set photo, lastContacted, numbers and emails to none/0/null;
+            bytContactPhoto = null;
+            strLastContacted = null;
+            strAllNumbers = null;
+            strAllEmails = null;
 
         }
 
