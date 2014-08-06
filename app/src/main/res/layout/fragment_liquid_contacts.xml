@@ -54,21 +54,20 @@
             android:layout_marginRight="@dimen/sub_header_margin_horiz"/>
 
         <ImageView
-            android:layout_width="@dimen/header_arrow_width"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="25dp"
             android:id="@+id/header_arrow_left"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/LiquidManagerHeader"
             android:src="@drawable/header_arrow" />
 
         <ImageView
-
-            android:layout_width="@dimen/header_arrow_width"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="-25dp"
             android:src="@drawable/header_arrow"
             android:layout_alignTop="@+id/LiquidManagerHeader"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/LiquidManagerHeader"
             android:rotation="180"
             android:id="@+id/header_arrow_right" />
 
