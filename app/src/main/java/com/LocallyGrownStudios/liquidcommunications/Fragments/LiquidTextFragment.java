@@ -22,13 +22,11 @@ public class LiquidTextFragment extends Fragment {
     private List<QuickConnectBean> mylist = new ArrayList<QuickConnectBean>();
     private ListView mylistView;
 
-    private final static String argSectionNumber = "section_number";
 
-    public static LiquidTextFragment newInstance(int sectionNumber) {
+    public static LiquidTextFragment newInstance() {
 
         LiquidTextFragment fragLQT = new LiquidTextFragment();
         Bundle args = new Bundle();
-        args.putInt(argSectionNumber, sectionNumber);
         fragLQT.setArguments(args);
         return fragLQT;
     }
