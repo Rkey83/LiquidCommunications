@@ -17,7 +17,8 @@
     <string name="title_activity_set_default_app">SetDefaultApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="sqlContacts">create table contacts (_id INTEGER primary key, LQ_Name TEXT, LQ_ContactPhoto BLOB, LQ_HasNumber INTEGER, LQ_Number TEXT, LQ_Email TEXT, LQ_HasContacted INTEGER, LQ_Contacted INTEGER, LQ_LastContacted DATE)</string>
-    //header strings        <string name="quick_connect">QuickConnect</string>
+    //header strings
+    <string name="quick_connect">QuickConnect</string>
     <string name="liquid_contacts">LiquidContacts</string>
     <string name="liquid_text">LiquidText</string>
     //footer strings        <string name="footer_text">Text</string>
