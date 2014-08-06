@@ -55,21 +55,21 @@
 
         <ImageView
             android:id="@+id/header_arrow_left"
-            android:layout_width="@dimen/header_arrow_width"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="25dp"
+            android:layout_toLeftOf="@id/LiquidManagerHeader"
             android:src="@drawable/header_arrow" />
 
         <ImageView
             android:id="@+id/header_arrow_right"
-            android:layout_width="@dimen/header_arrow_width"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/header_arrow"
+            android:translationX="-25dp"
             android:layout_alignTop="@+id/LiquidManagerHeader"
-            android:rotation="180"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_toRightOf="@+id/LiquidManagerHeader"
+            android:rotation="180"/>
 
     </RelativeLayout>
 
