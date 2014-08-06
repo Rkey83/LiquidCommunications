@@ -4,7 +4,6 @@
     <string name="app_name">LiquidCommunications</string>
     <string name="action_settings">Settings</string>
     <string name="import_button">Import</string>
-    <string name="liquid_text">LiquidText</string>
     <string name="skip_button">No Thanks</string>
     <string name="default_app_button">Set Default</string>
     <string name="import_contacts">Import Contacts</string>
@@ -18,5 +17,28 @@
     <string name="title_activity_set_default_app">SetDefaultApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="sqlContacts">create table contacts (_id INTEGER primary key, LQ_Name TEXT, LQ_ContactPhoto BLOB, LQ_HasNumber INTEGER, LQ_Number TEXT, LQ_Email TEXT, LQ_HasContacted INTEGER, LQ_Contacted INTEGER, LQ_LastContacted DATE)</string>
+    //header strings
+    <string name="quick_connect">QuickConnect</string>
+    <string name="liquid_contacts">LiquidContacts</string>
+    <string name="liquid_text">LiquidText</string>
+    //footer strings        <string name="footer_text">Text</string>
+    <string name="footer_email">Email</string>
+    <string name="footer_social">Social</string>
+    <string name="footer_call">Call</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    // Query Contact DataBase
+
+    // Stored Phone Types    <string name="strPhoneCustom">_0</string>
+    <string name="strPhoneHome">_1</string>
+    <string name="strPhoneCell">_2</string>
+    <string name="strPhoneWork">_3</string>
+    <string name="strFaxWork">_4</string>
+    <string name="strFaxHome">_5</string>
+    <string name="strPager">_6</string>
+    <string name="strPhoneOther">_7</string>
+    <string name="strPhoneCallBack">_8"</string>
+    <string name="title_activity_fullscreen_activity_test">FullscreenActivityTest</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

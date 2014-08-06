@@ -21,31 +21,34 @@ package com.LocallyGrownStudios.liquidcommunications.Adapters;
         import android.widget.QuickContactBadge;
         import android.widget.TextView;
         import android.widget.Toast;
-        import com.LocallyGrownStudios.liquidcommunications.Helpers.ContactBean;
+
+        import com.LocallyGrownStudios.liquidcommunications.Fragments.QuickConnectFragment;
+        import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
         import com.LocallyGrownStudios.liquidcommunications.R;
 
         import java.util.List;
 
 
-public class QuickConnectAdapter extends ArrayAdapter<ContactBean> {
+public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
 
 
     // Set Class Variables
 
     private Activity activity;
-    private List<ContactBean> contacts;
+    private List<QuickConnectBean> contacts;
     private int row;
-    private ContactBean objBean;
+    private QuickConnectBean objBean;
     String contactId;
     long number;
     public String contactTextMessages;
     public String textSender;
+    QuickConnectFragment quickConnectFragment = new QuickConnectFragment();
     final static int idEDIT_CONTACT = Menu.FIRST + 2;
 
 
     // Set Adapter Data
 
-    public QuickConnectAdapter(Activity act, int row, List<ContactBean> items) {
+    public QuickConnectAdapter(Activity act, int row, List<QuickConnectBean> items) {
         super(act, row, items);
         this.activity = act;
         this.row = row;
@@ -186,7 +189,10 @@ public class QuickConnectAdapter extends ArrayAdapter<ContactBean> {
             contactImage.setImageBitmap(objBean.ConctactPhotoGet());
             badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
             badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
-        }else {
+
+        }
+        else
+        {
             contactImage.setImageDrawable(objBean.DefaultPhotoGet());
             badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
             badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);

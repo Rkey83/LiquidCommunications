@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".Activities.FooterContainer">
+
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#BF808285"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_text"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="@dimen/footer_text_size"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewText"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginLeft="@dimen/footer_margin"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"/>
+
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_email"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="@dimen/footer_text_size"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewEmail"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginLeft="@dimen/footer_button_margin"
+            android:layout_toRightOf="@+id/btnNewText"
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_call"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="@dimen/footer_text_size"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewCall"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginRight="@dimen/footer_button_margin"
+            android:layout_toLeftOf="@+id/btnNewSocial"
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:text="@string/footer_social"
+            android:textStyle="bold"
+            android:onClick="clear"
+            android:textSize="@dimen/footer_text_size"
+            android:background="@drawable/text_input_background"
+            android:textColor="@color/contact_name"
+            android:id="@+id/btnNewSocial"
+            android:layout_marginTop="@dimen/footer_margin"
+            android:layout_marginBottom="@dimen/footer_margin"
+            android:layout_marginRight="@dimen/footer_margin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

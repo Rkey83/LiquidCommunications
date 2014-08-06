@@ -34,7 +34,8 @@ public class LiquidManager extends Activity {
         mainPager = (ViewPager) findViewById(R.id.pager);
         testAdapter = new CircularPagerAdapter(getFragmentManager());
         mainPager.setAdapter(testAdapter);
-        mainPager.setCurrentItem(1);
+        mainPager.setCurrentItem(2);
+        mainPager.setOnPageChangeListener(onPageChangeListener);
         Intent serviceSmsMms = new Intent(context, SmsMmsService.class);
         Cursor cursor = getContentResolver().query(ContactProvider.contactUri, null, null, null, null);
 
@@ -58,24 +59,26 @@ public class LiquidManager extends Activity {
             }
 
             @Override
-            public void onPageScrolled(int pageSelected, float positionOffset,
-                                       int positionOffsetPixel) {
-                Log.e("onPageScrolled", "pageSelected" + pageSelected
-                        + ",positionOffset:" + positionOffset
-                        + ",positionOffsetPixel:" + positionOffsetPixel);
+            public void onPageScrolled(int pageSelected, float positionOffset, int positionOffsetPixel) {
+
+                Log.e("onPageScrolled", "pageSelected" + pageSelected + ",positionOffset:" + positionOffset + ",positionOffsetPixel:" + positionOffsetPixel);
+                currentState = mainPager.getCurrentItem();
+
+               if (currentState == 0 && positionOffset < .01){
+                   mainPager.setCurrentItem(3, false);
+               }
+
+               if (currentState == 4 && positionOffset > .99){
+                   mainPager.setCurrentItem(1, false);
+               }
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 Log.e("onPageScrollStateChanged", "state:" + state);
-                int currentPage = mainPager.getCurrentItem();
-                if (currentPage == 3 || currentPage == 0) {
-                    previousState = currentState;
-                    currentState = state;
-                    if (previousState == 1 && currentState == 0) {
-                        mainPager.setCurrentItem(currentPage == 0 ? 3 : 0);
-                    }
-                }
+
+
             }
         };
 }

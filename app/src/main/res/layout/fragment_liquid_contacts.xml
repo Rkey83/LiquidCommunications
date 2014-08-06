@@ -1,11 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="1080px"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="1dp"
-    android:paddingRight="1dp"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
     android:scrollbars="none"
     android:scrollbarSize="0dp"
     tools:context=".ContactManager">
@@ -13,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/LMheader"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/header_height"
         android:background="#BF808285"
         android:layout_alignParentTop="true">
 
@@ -22,17 +18,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="false"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_centerHorizontal="true"
             android:textColor="#BCBEC0"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
             android:textSize="11pt"
             android:textStyle="bold"
-            android:text="LiquidConnect"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"/>
+            android:text="@string/liquid_contacts"
+            android:textAlignment="center" />
 
+        <TextView
+            android:id="@+id/liquidContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/sub_header_margin_top"
+            android:layout_marginLeft="@dimen/sub_header_margin_horiz"
+            android:textColor="@color/header_sub_text"
+            android:textSize="@dimen/header_sub_text_size"
+            android:textStyle="bold"
+            android:text="@string/liquid_text"/>
+
+        <TextView
+            android:id="@+id/QuickConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/liquidContacts"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/sub_header_margin_horiz"
+            android:textColor="@color/header_sub_text"
+            android:textSize="@dimen/header_sub_text_size"
+            android:textStyle="bold"
+            android:text="@string/quick_connect"/>
+
+        <ImageView
+            android:id="@+id/header_arrow_left"
+            android:src="@drawable/header_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/LiquidManagerHeader" />
+
+        <ImageView
+            android:id="@+id/header_arrow_right"
+            android:src="@drawable/header_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/LiquidManagerHeader"
+            android:layout_toRightOf="@+id/LiquidManagerHeader"
+            android:rotation="180" />
 
     </RelativeLayout>
 
@@ -47,7 +80,7 @@
         android:layout_above="@+id/btnNewText" />
 
     <RelativeLayout
-        android:id="@+id/rl2"
+        android:id="@+id/footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -128,9 +161,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
-
-
-
-
 
 </RelativeLayout>
