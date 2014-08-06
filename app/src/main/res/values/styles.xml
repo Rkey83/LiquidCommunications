@@ -16,6 +16,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingLeft">0dp</item>
+        <item name="android:layout_margin">0dp</item>
         <item name="android:colorPressedHighlight">#CCCC00</item>
         <item name="android:colorFocusedHighlight">#CCCC00</item>
         <item name="android:colorActivatedHighlight">#CCCC00</item>

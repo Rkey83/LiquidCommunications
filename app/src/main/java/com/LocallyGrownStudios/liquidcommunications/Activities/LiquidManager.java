@@ -62,13 +62,13 @@ public class LiquidManager extends Activity {
             public void onPageScrolled(int pageSelected, float positionOffset, int positionOffsetPixel) {
 
                 Log.e("onPageScrolled", "pageSelected" + pageSelected + ",positionOffset:" + positionOffset + ",positionOffsetPixel:" + positionOffsetPixel);
-                previousState = mainPager.getCurrentItem();
+                currentState = mainPager.getCurrentItem();
 
-               if (previousState == 0 && positionOffset < .99){
+               if (currentState == 0 && positionOffset < .01){
                    mainPager.setCurrentItem(3, false);
                }
 
-               if (previousState == 4 && positionOffset > .01){
+               if (currentState == 4 && positionOffset > .99){
                    mainPager.setCurrentItem(1, false);
                }
 
