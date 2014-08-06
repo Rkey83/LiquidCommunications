@@ -20,7 +20,6 @@ import com.LocallyGrownStudios.liquidcommunications.General.Converters;
 import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,21 +29,23 @@ public class QuickConnectFragment extends Fragment {
     // Set Class Objects
 
     Context context;
-    private List<QuickConnectBean> mylist = new ArrayList<QuickConnectBean>();
-    public static ListView mylistView;
+    private List<QuickConnectBean> listQuickConnect = new ArrayList<QuickConnectBean>();
+    public static ListView lstvwQuickConnect;
     String strContactsNumber;
 
 
 
     // Method to create a new instance of the fragment from another class
 
-    public static QuickConnectFragment newInstance(int position) {
+    public static QuickConnectFragment newInstance() {
 
         QuickConnectFragment fragQC = new QuickConnectFragment();
         Bundle args = new Bundle();
         fragQC.setArguments(args);
         return fragQC;
     }
+
+    // On the creation of the view find the following layout
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class QuickConnectFragment extends Fragment {
         // Create View, get Context and XML
         super.onViewCreated(view, savedInstanceState);
         context = this.getActivity();
-        mylistView = (ListView) view.findViewById(R.id.contactListView);
+        lstvwQuickConnect = (ListView) view.findViewById(R.id.contactListView);
 
         // Get Contacts to fill QuickConnect
 
@@ -73,8 +74,8 @@ public class QuickConnectFragment extends Fragment {
 
         // Send the values to the list adapter
 
-        QuickConnectAdapter quickConnectAdapter = new QuickConnectAdapter(this.getActivity(), R.layout.list_item_quick_connect, mylist);
-        mylistView.setAdapter(quickConnectAdapter);
+        QuickConnectAdapter quickConnectAdapter = new QuickConnectAdapter(this.getActivity(), R.layout.list_item_quick_connect, listQuickConnect);
+        lstvwQuickConnect.setAdapter(quickConnectAdapter);
 
     }
 
@@ -120,7 +121,7 @@ public class QuickConnectFragment extends Fragment {
 
             // If column LQ_Photo is not empty, convert the ByteArray to a bitmap and set it to btmpContactPhoto
             if (bytContactPhoto != null) {
-                btmpContactPhoto = BitmapFactory.decodeByteArray(bytContactPhoto,0, bytContactPhoto.length);
+                btmpContactPhoto = BitmapFactory.decodeByteArray(bytContactPhoto, 0, bytContactPhoto.length);
                 btmpContactPhoto = Bitmap.createScaledBitmap(btmpContactPhoto, 124, 124, true);
                 objContact.ContactPhotoSet(btmpContactPhoto);
             }
@@ -139,7 +140,7 @@ public class QuickConnectFragment extends Fragment {
 
             // Add the array to a list
 
-            mylist.add(objContact);
+            listQuickConnect.add(objContact);
         }
 
         // Close the cursor

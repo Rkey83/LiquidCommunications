@@ -15,8 +15,6 @@ import com.LocallyGrownStudios.liquidcommunications.R;
 public class CircularPagerAdapter extends FragmentPagerAdapter {
 
     Fragment currentFragment;
-    private int pos = 0;
-
 
     public CircularPagerAdapter (FragmentManager fm) {
 
@@ -44,33 +42,34 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
 
             case 0:
 
-                currentFragment = LiquidTextFragment.newInstance(0);
+                currentFragment = LiquidTextFragment.newInstance();
                 return currentFragment;
 
             case 1:
 
-                currentFragment = LiquidContactsFragment.newInstance(1);
+                currentFragment = LiquidContactsFragment.newInstance();
                 return currentFragment;
 
             case 2:
 
-                currentFragment = QuickConnectFragment.newInstance(2);
+                currentFragment = QuickConnectFragment.newInstance();
                 return currentFragment;
 
             case 3:
 
-                currentFragment = LiquidTextFragment.newInstance(3);
+                currentFragment = LiquidTextFragment.newInstance();
                 return currentFragment;
 
             case 4:
 
-                currentFragment = LiquidContactsFragment.newInstance(4);
+                currentFragment = LiquidContactsFragment.newInstance();
                 return currentFragment;
 
         }
 
-        return LiquidContactsFragment.newInstance(position);
+        return LiquidContactsFragment.newInstance();
     }
+
 
     @Override
     public int getCount() {
