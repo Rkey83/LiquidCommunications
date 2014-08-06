@@ -3,7 +3,6 @@ package com.LocallyGrownStudios.liquidcommunications.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +13,6 @@ import com.LocallyGrownStudios.liquidcommunications.General.FirstRunCheck;
 import com.LocallyGrownStudios.liquidcommunications.General.ImportOptions;
 import com.LocallyGrownStudios.liquidcommunications.R;
 import com.LocallyGrownStudios.liquidcommunications.Services.ImportContactService;
-import com.LocallyGrownStudios.liquidcommunications.Services.SmsMmsService;
 
 public class ContactImporter extends Activity implements View.OnClickListener{
 

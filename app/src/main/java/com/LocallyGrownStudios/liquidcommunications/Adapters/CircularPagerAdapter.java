@@ -15,7 +15,7 @@ import com.LocallyGrownStudios.liquidcommunications.R;
 public class CircularPagerAdapter extends FragmentPagerAdapter {
 
     Fragment currentFragment;
-    private int pos;
+    private int pos = 0;
 
 
     public CircularPagerAdapter (FragmentManager fm) {
@@ -29,16 +29,6 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-
-        ViewPager viewPager = (ViewPager) container.findViewById(R.id.pager);
-        int i = viewPager.getCurrentItem();
-
-        if ( i < 1 ){
-            viewPager.setCurrentItem(3);
-        }
-        if ( i > 3){
-            viewPager.setCurrentItem(1);
-        }
 
         return super.instantiateItem(container, position);
 
@@ -54,27 +44,27 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
 
             case 0:
 
-                currentFragment = LiquidTextFragment.newInstance(1);
+                currentFragment = LiquidTextFragment.newInstance(0);
                 return currentFragment;
 
             case 1:
 
-                currentFragment = LiquidContactsFragment.newInstance(2);
+                currentFragment = LiquidContactsFragment.newInstance(1);
                 return currentFragment;
 
             case 2:
 
-                currentFragment = QuickConnectFragment.newInstance(3);
+                currentFragment = QuickConnectFragment.newInstance(2);
                 return currentFragment;
 
             case 3:
 
-                currentFragment = LiquidTextFragment.newInstance(4);
+                currentFragment = LiquidTextFragment.newInstance(3);
                 return currentFragment;
 
             case 4:
 
-                currentFragment = LiquidContactsFragment.newInstance(5);
+                currentFragment = LiquidContactsFragment.newInstance(4);
                 return currentFragment;
 
         }

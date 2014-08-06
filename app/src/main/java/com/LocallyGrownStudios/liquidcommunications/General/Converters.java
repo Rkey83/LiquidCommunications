@@ -16,7 +16,8 @@ public class Converters {
     // Class objects
     public static String strSeparator = " , ";
     public static String[] arr;
-
+    public static String phoneNumber;
+    String phoneCustom = "_0", phoneHome = "_1", phoneCell = "_2",  phoneWork = "_3", faxWork = "_4", faxHome = "_5",  pager = "_6", phoneOther = "_7", phoneCallBack = "_8";
 
     // Combine values from an Array into a single String and separate with value of strSeparator.
     public static String convertArrayToString(String[] array){
@@ -63,6 +64,28 @@ public class Converters {
     // convert from byte array to bitmap
     public static Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+
+    public static String formatMultiPhoneNumbersQC(String string, int type){
+
+        String[] stringArr = convertStringToArray(string);
+
+        for (int x = 0; x < stringArr.length; x ++){
+
+            string = stringArr[x];
+
+            if (string.contains("_" + type)){
+
+                phoneNumber = string;
+                break;
+            }
+            else{
+
+                phoneNumber = stringArr[0];
+            }
+        }
+
+        return phoneNumber.split("_")[0];
     }
 
 

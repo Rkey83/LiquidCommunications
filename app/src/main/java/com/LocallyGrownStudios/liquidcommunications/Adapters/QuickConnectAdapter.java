@@ -21,6 +21,8 @@ package com.LocallyGrownStudios.liquidcommunications.Adapters;
         import android.widget.QuickContactBadge;
         import android.widget.TextView;
         import android.widget.Toast;
+
+        import com.LocallyGrownStudios.liquidcommunications.Fragments.QuickConnectFragment;
         import com.LocallyGrownStudios.liquidcommunications.Helpers.ContactBean;
         import com.LocallyGrownStudios.liquidcommunications.R;
 
@@ -40,6 +42,7 @@ public class QuickConnectAdapter extends ArrayAdapter<ContactBean> {
     long number;
     public String contactTextMessages;
     public String textSender;
+    QuickConnectFragment quickConnectFragment = new QuickConnectFragment();
     final static int idEDIT_CONTACT = Menu.FIRST + 2;
 
 
@@ -186,7 +189,10 @@ public class QuickConnectAdapter extends ArrayAdapter<ContactBean> {
             contactImage.setImageBitmap(objBean.ConctactPhotoGet());
             badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
             badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
-        }else {
+
+        }
+        else
+        {
             contactImage.setImageDrawable(objBean.DefaultPhotoGet());
             badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
             badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
