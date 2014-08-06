@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.LocallyGrownStudios.liquidcommunications.Helpers.ContactBean;
+import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.List;
 public class LiquidTextFragment extends Fragment {
 
     Context context;
-    private List<ContactBean> mylist = new ArrayList<ContactBean>();
+    private List<QuickConnectBean> mylist = new ArrayList<QuickConnectBean>();
     private ListView mylistView;
 
     private final static String argSectionNumber = "section_number";

@@ -108,6 +108,7 @@ public class ImportContactService extends Service {
 
         // Make Toast
         Toast.makeText(this, "Contacts DataBase Created", Toast.LENGTH_LONG).show();
+        stopService(intent);
 
         // If called as a Method, return ..
         return super.onStartCommand(intent, flags, startId);

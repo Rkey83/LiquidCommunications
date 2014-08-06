@@ -21,31 +21,34 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
+
+import com.LocallyGrownStudios.liquidcommunications.Fragments.LiquidContactsFragment;
+import com.LocallyGrownStudios.liquidcommunications.Helpers.LiquidContactsBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
 
 import java.util.List;
 
 
-public class SmsMmsStreamAdapter extends ArrayAdapter<QuickConnectBean> {
+public class LiquidContactsAdapter extends ArrayAdapter<LiquidContactsBean> {
 
 
     // Set Class Variables
 
     private Activity activity;
-    private List<QuickConnectBean> contacts;
+    private List<LiquidContactsBean> contacts;
     private int row;
-    private QuickConnectBean objBean;
+    private LiquidContactsBean objBean;
     String contactId;
     long number;
     public String contactTextMessages;
     public String textSender;
+    LiquidContactsFragment liquidContactsFragment = new LiquidContactsFragment();
     final static int idEDIT_CONTACT = Menu.FIRST + 2;
 
 
-    // Set Adapter Data
+    // Set Adapter Data and create a new row for each row in the list from LiquidCommunicationsBean
 
-    public SmsMmsStreamAdapter(Activity act, int row, List<QuickConnectBean> items) {
+    public LiquidContactsAdapter(Activity act, int row, List<LiquidContactsBean> items) {
         super(act, row, items);
         this.activity = act;
         this.row = row;
@@ -116,11 +119,7 @@ public class SmsMmsStreamAdapter extends ArrayAdapter<QuickConnectBean> {
                     if (holder.message.getText().toString().contains(":")) {
                         holder.message.performHapticFeedback(1);
                         Log.i("MyTag", "Text message is pressed, visible in LogCat");
-                        //  String textNumber = holder.phoneNo.getText().toString();
-                        //   Intent intentTextMessages = new Intent(v.getContext(), TextManager.class);
-                        //   intentTextMessages.putExtra("senderNumber" ,textNumber);
                         activity.finish();
-                        //    v.getContext().startActivity(intentTextMessages);
                     } else {
                         holder.message.performHapticFeedback(1);
                         Log.i("MyTag", "Text message is pressed, visible in LogCat");
@@ -134,7 +133,7 @@ public class SmsMmsStreamAdapter extends ArrayAdapter<QuickConnectBean> {
         });
 
 
-        // onClick Listener for Contact Name Field
+        //  onClick Listener for Contact Name Field
 
         holder.name.setOnLongClickListener(new Button.OnLongClickListener() {
             @Override
@@ -157,7 +156,7 @@ public class SmsMmsStreamAdapter extends ArrayAdapter<QuickConnectBean> {
 
 
 
-        // Set Text in Text Message Field
+        // If value from LiquidCommunicationBean is not empty, Set Text in Text Message Field to its value
 
         if (holder.name != null && null != objBean.Nameget() && objBean.Nameget().trim().length() > 0) {
             holder.name.setText(Html.fromHtml(objBean.Nameget()));
@@ -168,32 +167,41 @@ public class SmsMmsStreamAdapter extends ArrayAdapter<QuickConnectBean> {
         // Set Text in Phone Number Field, and Pass Number to Text Messaging Activity
 
         if (holder.phoneNo != null && null != objBean.PhoneNoget() && objBean.PhoneNoget().trim().length() > 0) {
+
             holder.phoneNo.setText(Html.fromHtml(objBean.PhoneNoget()));
             textSender = holder.phoneNo.getText().toString();
         }
 
 
-        // Set Text Message Field
+        // If value from LiquidCommunicationBean is not empty, Set Text Message Field to its value
 
         if (holder.message != null && null != objBean.LastTextGet() && objBean.LastTextGet().trim().length() > 0) {
+
             holder.message.setText(Html.fromHtml(objBean.LastTextGet()));
+
         }
 
 
-        // Set the Contact Badge and Image
+        // If value from LiquidCommunicationBean is not empty, Set the Contact Badge and Image
 
-      //  if (badgeSmall != null && objBean.ConctactPhotoGet() != null && objBean.ConctactPhotoGet().getByteCount() > 0) {
-     //       contactImage.setImageBitmap(objBean.ConctactPhotoGet());
-     //       badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
-     //       badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
-     //   }else {
-      //      contactImage.setImageDrawable(objBean.DefaultPhotoGet());
-      //      badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
-      //      badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
-     //   }
+        if (badgeSmall != null && objBean.ConctactPhotoGet() != null && objBean.ConctactPhotoGet().getByteCount() > 0) {
+            contactImage.setImageBitmap(objBean.ConctactPhotoGet());
+            badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
+            badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
+
+        }
+        else
+        {
+            contactImage.setImageDrawable(objBean.DefaultPhotoGet());
+            badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
+            badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
+        }
 
         return view;
     }
+
+
+    // Get the ID of the Contact being pressed
 
     private void GetContactId(View v) {
         ContentResolver contentResolver = v.getContext().getContentResolver();
@@ -222,6 +230,9 @@ public class SmsMmsStreamAdapter extends ArrayAdapter<QuickConnectBean> {
     }
 
 
+
+
+    // Add an Object here for each field you want to populate
 
     public class ViewHolder {
         public TextView name, phoneNo, message;

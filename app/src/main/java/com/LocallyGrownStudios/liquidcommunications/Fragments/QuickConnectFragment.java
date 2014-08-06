@@ -14,7 +14,7 @@ import android.widget.ListView;
 import com.LocallyGrownStudios.liquidcommunications.Adapters.QuickConnectAdapter;
 import com.LocallyGrownStudios.liquidcommunications.ContentProviders.ContactProvider;
 import com.LocallyGrownStudios.liquidcommunications.General.Converters;
-import com.LocallyGrownStudios.liquidcommunications.Helpers.ContactBean;
+import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class QuickConnectFragment extends Fragment {
     // Set Class Objects
 
     Context context;
-    private List<ContactBean> mylist = new ArrayList<ContactBean>();
+    private List<QuickConnectBean> mylist = new ArrayList<QuickConnectBean>();
     public static ListView mylistView;
     String strContactsNumber;
 
@@ -82,7 +82,7 @@ public class QuickConnectFragment extends Fragment {
 
         // Start the Cursor to query the database. Filter the list by the column LQ_HasContacted and sort by the column LQ_Contacted
 
-        Cursor cursor = context.getContentResolver().query(ContactProvider.contactUri, null, "LQ_HasContacted", null, "LQ_Contacted");
+        Cursor cursor = context.getContentResolver().query(ContactProvider.contactUri, null, "LQ_HasContacted", null, "LQ_Contacted" + " DESC");
 
         // While there is another entry in the database, move to it
 
@@ -90,7 +90,7 @@ public class QuickConnectFragment extends Fragment {
 
             // For each entry in the database that matches our search criteria
 
-            ContactBean objContact = new ContactBean();
+            QuickConnectBean objContact = new QuickConnectBean();
 
             // Get the entry from the column LQ_Number
            strContactsNumber = cursor.getString(4);

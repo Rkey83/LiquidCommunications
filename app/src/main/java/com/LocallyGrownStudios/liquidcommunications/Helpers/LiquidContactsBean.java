@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-public class ContactBean {
+public class LiquidContactsBean {
 
     private String name;
     private String phoneNo;
