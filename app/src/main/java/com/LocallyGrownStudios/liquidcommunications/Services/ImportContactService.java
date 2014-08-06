@@ -184,7 +184,7 @@ public class ImportContactService extends Service {
 
                 // Otherwise set to 0
                 else {
-                    strLastContacted = "0";
+                    strLastContacted = null;
                 }
 
                 // Get Phone Number, Type and type, add to an Array List
@@ -209,7 +209,7 @@ public class ImportContactService extends Service {
             else {
 
                 // Otherwise if contact does not have a Number set to none
-                strAllNumbers = "none";
+                strAllNumbers = null;
 
             }
 
@@ -238,16 +238,16 @@ public class ImportContactService extends Service {
 
             // Otherwise if contact does not have an Email, set to none
             else {
-                strAllEmails = "none";
+                strAllEmails = null;
             }
 
         } else {
 
             // If contact does not have a Number set photo, lastContacted, numbers and emails to none/0/null;
             bytContactPhoto = null;
-            strLastContacted = "0";
-            strAllNumbers = "none";
-            strAllEmails = "none";
+            strLastContacted = null;
+            strAllNumbers = null;
+            strAllEmails = null;
 
         }
 

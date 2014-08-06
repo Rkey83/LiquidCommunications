@@ -26,4 +26,20 @@
     <string name="footer_call">Call</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    // Query Contact DataBase
+
+    // Stored Phone Types
+
+    <string name="strPhoneCustom">_0</string>
+    <string name="strPhoneHome">_1</string>
+    <string name="strPhoneCell">_2</string>
+    <string name="strPhoneWork">_3</string>
+    <string name="strFaxWork">_4</string>
+    <string name="strFaxHome">_5</string>
+    <string name="strPager">_6</string>
+    <string name="strPhoneOther">_7</string>
+    <string name="strPhoneCallBack">_8"</string>
+
+
 </resources>
