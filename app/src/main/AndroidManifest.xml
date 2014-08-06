@@ -77,6 +77,13 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".Activities.FullscreenActivityTest"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen_activity_test"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
     </application>
 
 </manifest>

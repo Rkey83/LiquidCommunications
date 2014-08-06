@@ -18,8 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="false"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:textColor="#BCBEC0"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
@@ -56,7 +54,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="25dp"
             android:id="@+id/header_arrow_left"
             android:layout_toLeftOf="@id/LiquidManagerHeader"
             android:src="@drawable/header_arrow" />
@@ -64,7 +61,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="-25dp"
             android:src="@drawable/header_arrow"
             android:layout_alignTop="@+id/LiquidManagerHeader"
             android:layout_toRightOf="@+id/LiquidManagerHeader"

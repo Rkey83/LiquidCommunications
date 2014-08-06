@@ -5,9 +5,9 @@
 
 
     //header dimensions
-    <dimen name="sub_header_margin_horiz">12dp</dimen>
+    <dimen name="sub_header_margin_horiz">8dp</dimen>
     <dimen name="sub_header_margin_top">14dp</dimen>
-    <dimen name="header_sub_text_size">4pt</dimen>
+    <dimen name="header_sub_text_size">4.5pt</dimen>
     <dimen name="header_height">40dp</dimen>
 
     //footer dimensions
