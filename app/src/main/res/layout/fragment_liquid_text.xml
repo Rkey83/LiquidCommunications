@@ -54,14 +54,14 @@
 
         <ImageView
             android:id="@+id/header_arrow_left"
-            android:layout_width="@dimen/header_arrow_width"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:src="@drawable/header_arrow" />
 
         <ImageView
             android:id="@+id/header_arrow_right"
-            android:layout_width="@dimen/header_arrow_width"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/header_arrow"
             android:layout_alignTop="@+id/LiquidManagerHeader"

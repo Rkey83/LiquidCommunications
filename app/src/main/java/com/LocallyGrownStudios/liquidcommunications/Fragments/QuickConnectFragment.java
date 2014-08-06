@@ -4,6 +4,9 @@ package com.LocallyGrownStudios.liquidcommunications.Fragments;
 // Import these resources
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import com.LocallyGrownStudios.liquidcommunications.General.Converters;
 import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +84,8 @@ public class QuickConnectFragment extends Fragment {
 
     public void GetContacts() {
 
+        Bitmap btmpContactPhoto;
+
         // Start the Cursor to query the database. Filter the list by the column LQ_HasContacted and sort by the column LQ_Contacted
 
         Cursor cursor = context.getContentResolver().query(ContactProvider.contactUri, null, "LQ_HasContacted", null, "LQ_Contacted" + " DESC");
@@ -107,6 +113,22 @@ public class QuickConnectFragment extends Fragment {
             // If no data is found, set value to No Email
             if (strContactsEmailAddress == null) {
                 strContactsEmailAddress = "No Email";
+            }
+
+            //Get the entry for LQ_Photo
+            byte[] bytContactPhoto = cursor.getBlob(2);
+
+            // If column LQ_Photo is not empty, convert the ByteArray to a bitmap and set it to btmpContactPhoto
+            if (bytContactPhoto != null) {
+                btmpContactPhoto = BitmapFactory.decodeByteArray(bytContactPhoto,0, bytContactPhoto.length);
+                btmpContactPhoto = Bitmap.createScaledBitmap(btmpContactPhoto, 124, 124, true);
+                objContact.ContactPhotoSet(btmpContactPhoto);
+            }
+
+            // Otherwise set contacts photo to default image
+            else {
+               Drawable drwDefaultImage = getResources().getDrawable(R.drawable.default_contact_image);
+                objContact.DefaultPhotoSet(drwDefaultImage);
             }
 
             // Set Values found to an array
