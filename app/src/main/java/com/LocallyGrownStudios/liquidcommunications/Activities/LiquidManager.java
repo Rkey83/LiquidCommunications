@@ -65,11 +65,11 @@ public class LiquidManager extends Activity {
                 previousState = mainPager.getCurrentItem();
 
                if (previousState == 0 && positionOffset < .99){
-                   mainPager.setCurrentItem(3);
+                   mainPager.setCurrentItem(3, false);
                }
 
                if (previousState == 4 && positionOffset > .01){
-                   mainPager.setCurrentItem(1);
+                   mainPager.setCurrentItem(1, false);
                }
 
             }
@@ -78,14 +78,6 @@ public class LiquidManager extends Activity {
             public void onPageScrollStateChanged(int state) {
                 Log.e("onPageScrollStateChanged", "state:" + state);
 
-          //      currentState = mainPager.getCurrentItem();
-
-         //       if (previousState == 1 && currentState == 0){
-          //          mainPager.setCurrentItem(3);
-          //      }
-         //       if (previousState == 3 && currentState == 4){
-         //           mainPager.setCurrentItem(1);
-           //     }
 
             }
         };

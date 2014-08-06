@@ -67,8 +67,7 @@
             android:layout_alignTop="@+id/LiquidManagerHeader"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:rotation="180"
-            android:drawable="@drawable/header_arrow"/>
+            android:rotation="180"/>
 
 
     </RelativeLayout>
