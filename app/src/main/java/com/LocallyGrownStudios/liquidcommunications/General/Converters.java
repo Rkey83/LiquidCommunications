@@ -88,7 +88,46 @@ public class Converters {
         return phoneNumber.split("_")[0];
     }
 
+    public static String formatPhoneNumber(String string){
 
+        if (string != null) {
+
+            if (string.contains("(")) {
+
+                return string;
+
+            } else {
+
+                if (string.length() <= 8) {
+
+                    return string;
+
+                }
+
+                if (string.length() >= 10 && string.length() < 11) {
+
+                    String areaCodeRaw = string.substring(0, 3);
+                    String numberProper = string.substring(3, 6);
+                    String numberLast = string.substring(6);
+                    String contactsNumber = "(" + areaCodeRaw + ")" + " " + numberProper + "-" + numberLast;
+                    string = contactsNumber;
+
+                }
+
+                else {
+
+                    String remIntCode = string.substring(2);
+                    String areaCodeRaw = remIntCode.substring(0, 3);
+                    String numberProper = remIntCode.substring(3, 6);
+                    String numberLast = remIntCode.substring(6);
+                    String contactsNumber = "(" + areaCodeRaw + ")" + " " + numberProper + "-" + numberLast;
+                    string = contactsNumber;
+
+                }
+            }
+        }
+        return string;
+    }
 
 
 
