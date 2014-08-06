@@ -67,6 +67,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/header_arrow"
             android:layout_alignTop="@+id/LiquidManagerHeader"
+            android:rotation="180"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
