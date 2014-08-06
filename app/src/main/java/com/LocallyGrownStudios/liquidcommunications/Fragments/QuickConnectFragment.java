@@ -28,10 +28,13 @@ public class QuickConnectFragment extends Fragment {
     Context context;
     private List<ContactBean> mylist = new ArrayList<ContactBean>();
     public static ListView mylistView;
+    int cellPhone = 2;
+    private String strContactsNumber, strContactsName, strContactsEmailAddress;
 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         context = this.getActivity();
         mylistView = (ListView) view.findViewById(R.id.contactListView);
@@ -69,15 +72,16 @@ public class QuickConnectFragment extends Fragment {
         while (cursor.moveToNext()) {
 
             ContactBean objContact = new ContactBean();
+            strContactsNumber = cursor.getString(4);
 
             String avb = cursor.getString(1);
-            String tyb = cursor.getString(4);
 
-            if (tyb.contains(",")){
-                tyb = Converters.formatMultiPhoneNumbersQC(tyb,2);
+
+            if (strContactsNumber.contains(",")){
+                strContactsNumber = Converters.getFromMultiPhoneNumbers(strContactsNumber,R.integer.intPhoneCell);
             }
             else {
-                tyb = tyb.split("_")[0];
+                strContactsNumber = strContactsNumber.split("_")[0];
             }
 
             String kfd = cursor.getString(5);
@@ -87,13 +91,22 @@ public class QuickConnectFragment extends Fragment {
             }
 
             objContact.Nameset(avb);
-            objContact.PhoneNoset(tyb);
+            objContact.PhoneNoset(strContactsNumber);
             objContact.LastTextSet(kfd);
 
             mylist.add(objContact);
         }
         cursor.close();
     }
+
+
+    private void getContactsPhoneNumber() {
+
+
+
+
+    }
+
 
 
     private void initState() {

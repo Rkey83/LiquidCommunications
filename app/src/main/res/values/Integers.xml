@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // Query Contact DataBase Table
+
+    // Row Id's
+
+    <integer name="intLQ_ID">0</integer>
+    <integer name="intLQ_Name">1</integer>
+    <integer name="intLQ_ContactPhoto">2</integer>
+    <integer name="intLQ_HasNumber">3</integer>
+    <integer name="intLQ_Number">4</integer>
+    <integer name="intLQ_Email">5</integer>
+    <integer name="intLQ_HasContacted">6</integer>
+    <integer name="intLQ_Contacted">7</integer>
+    <integer name="intLQ_LastContacted">8</integer>
+
+    // Phone Types
+
+    <integer name="intPhoneCustom" >0</integer>
+    <integer name="intPhoneHome">1</integer>
+    <integer name="intPhoneCell">2</integer>
+    <integer name="intPhoneWork">3</integer>
+    <integer name="intFaxWork">4</integer>
+    <integer name="intFaxHome">5</integer>
+    <integer name="intPager">6</integer>
+    <integer name="intPhoneOther">7</integer>
+    <integer name="intPhoneCallBack">8</integer>
+
+
+
+</resources>
