@@ -2,13 +2,18 @@ package com.LocallyGrownStudios.liquidcommunications.General;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.PorterDuff;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Converters {
 
@@ -52,6 +57,21 @@ public class Converters {
         return formatter.format(calendar.getTime());
     }
 
+    public static long convertDateToLong(String string){
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        long curMillis;
+        Date curDate = null;
+        try {
+            curDate = formatter.parse(string);
+            curMillis = curDate.getTime();
+            return curMillis;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 
     // convert from bitmap to byte array
@@ -129,6 +149,37 @@ public class Converters {
         return string;
     }
 
+    public static Date convertStringToDate (String string){
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return convertedDate;
+    }
+
+    public static Bitmap adjustOpacity(Bitmap bitmap, int opacity)
+    {
+        Bitmap mutableBitmap = bitmap.isMutable()
+                ? bitmap
+                : bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(mutableBitmap);
+        int colour = (opacity & 0xFF) << 24;
+        canvas.drawColor(colour, PorterDuff.Mode.DST_IN);
+        return mutableBitmap;
+    }
+
+
+    public static String stripNumberFormatiing(String string){
+
+        if (string.contains("(")){
+            string = string.replaceAll("[^0-9]", "");
+        }
+        return string;
+    }
 
 
 }

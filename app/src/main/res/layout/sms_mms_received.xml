@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp">
+
+
+    <TextView
+        android:id="@+id/txtMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="12pt"
+        android:paddingBottom="4pt"
+        android:hapticFeedbackEnabled="true"
+        android:paddingLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:minHeight="1dp"
+        android:background="@drawable/sms_mms_received_background"
+        android:minWidth="1dp"
+        android:layout_alignRight="@id/contactListView"
+        android:paddingRight="20dp"
+        android:textColor="@color/contact_name"
+        android:textSize="16dip"
+        android:clickable="true"
+        android:longClickable="true" />
+
+
+</RelativeLayout>
+
