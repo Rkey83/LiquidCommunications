@@ -83,13 +83,13 @@
 
     <ListView
         android:id="@+id/contactListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scrollbars="none"
         android:scrollbarAlwaysDrawVerticalTrack="false"
         android:fastScrollEnabled="false"
         android:layout_below="@+id/LMheader"
-        android:layout_above="@+id/btnNewText" />
+        android:layout_above="@+id/footer" />
 
     <!-- Footer Container -->
     <LinearLayout
