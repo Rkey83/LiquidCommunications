@@ -89,7 +89,6 @@
 
         <activity
             android:name=".Activities.SmsMmsStream"
-            android:label="@string/title_activity_sms_mms_stream"
             android:theme="@style/Theme.Translucent.NoTitleBar"
             android:launchMode="singleInstance"
             android:taskAffinity="com.LocallyGrownStudios.Tasks.SmsMmsStream"
