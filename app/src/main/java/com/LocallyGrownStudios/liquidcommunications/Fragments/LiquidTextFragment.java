@@ -1,7 +1,5 @@
 package com.LocallyGrownStudios.liquidcommunications.Fragments;
 
-
-
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.animation.Animator;
 
 import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
@@ -22,7 +21,6 @@ public class LiquidTextFragment extends Fragment {
     private List<QuickConnectBean> mylist = new ArrayList<QuickConnectBean>();
     private ListView mylistView;
 
-
     public static LiquidTextFragment newInstance() {
 
         LiquidTextFragment fragLQT = new LiquidTextFragment();
@@ -30,7 +28,6 @@ public class LiquidTextFragment extends Fragment {
         fragLQT.setArguments(args);
         return fragLQT;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +37,5 @@ public class LiquidTextFragment extends Fragment {
         return viewLQT;
 
     }
-
 
 }

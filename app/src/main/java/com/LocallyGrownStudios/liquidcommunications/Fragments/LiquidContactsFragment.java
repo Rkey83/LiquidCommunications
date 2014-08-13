@@ -1,7 +1,5 @@
 package com.LocallyGrownStudios.liquidcommunications.Fragments;
 
-
-
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -20,15 +18,12 @@ import com.LocallyGrownStudios.liquidcommunications.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class LiquidContactsFragment extends Fragment {
 
     Context context;
     private List<LiquidContactsBean> listLiquidContacts = new ArrayList<LiquidContactsBean>();
     public static ListView lstvwLiquidContacts;
     String strContactsNumber;
-
-
 
     public static LiquidContactsFragment newInstance() {
 
@@ -37,9 +32,6 @@ public class LiquidContactsFragment extends Fragment {
         fragLQC.setArguments(args);
         return fragLQC;
     }
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +65,6 @@ public class LiquidContactsFragment extends Fragment {
     public void GetContacts() {
 
         Cursor cursor = context.getContentResolver().query(ContactProvider.contactUri, null, "LQ_HasContacted", null, "LQ_Contacted" + " DESC");
-
 
     }
 

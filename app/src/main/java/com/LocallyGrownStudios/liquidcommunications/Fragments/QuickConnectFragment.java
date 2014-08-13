@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.animation.AnimatorSet;
 
 import com.LocallyGrownStudios.liquidcommunications.Adapters.QuickConnectAdapter;
 import com.LocallyGrownStudios.liquidcommunications.ContentProviders.ContactProvider;
@@ -33,8 +34,6 @@ public class QuickConnectFragment extends Fragment {
     public static ListView lstvwQuickConnect;
     String strContactsNumber;
 
-
-
     // Method to create a new instance of the fragment from another class
 
     public static QuickConnectFragment newInstance() {
@@ -52,11 +51,8 @@ public class QuickConnectFragment extends Fragment {
 
         context = this.getActivity();
         View viewQC = inflater.inflate(R.layout.fragment_quick_connect, container, false);
-
-
         return viewQC;
     }
-
 
     // When the Fragment has been created
 
@@ -78,8 +74,6 @@ public class QuickConnectFragment extends Fragment {
         lstvwQuickConnect.setAdapter(quickConnectAdapter);
 
     }
-
-
 
     // Method to get contact info for QuickConnect
 
@@ -147,7 +141,6 @@ public class QuickConnectFragment extends Fragment {
         cursor.close();
     }
 
-
     // Method to parse and format phone numbers
 
     private void getContactsPhoneNumber() {
@@ -175,4 +168,6 @@ public class QuickConnectFragment extends Fragment {
            strContactsNumber = Converters.formatPhoneNumber(strContactsNumber);
         }
     }
+
+
 }

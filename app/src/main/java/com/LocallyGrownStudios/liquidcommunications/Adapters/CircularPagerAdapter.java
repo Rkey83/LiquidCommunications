@@ -18,8 +18,6 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
 
     public CircularPagerAdapter (FragmentManager fm) {
 
-
-
         super(fm);
 
     }
@@ -29,7 +27,6 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         return super.instantiateItem(container, position);
-
 
     }
 
@@ -70,16 +67,18 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
         return LiquidContactsFragment.newInstance();
     }
 
-
     @Override
     public int getCount() {
+
         return 5;
+
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return null;
-    }
 
+        return null;
+
+    }
 
 }

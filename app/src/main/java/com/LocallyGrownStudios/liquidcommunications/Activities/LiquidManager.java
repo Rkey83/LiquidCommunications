@@ -1,6 +1,5 @@
 package com.LocallyGrownStudios.liquidcommunications.Activities;
 
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -10,14 +9,12 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
-
 import com.LocallyGrownStudios.liquidcommunications.Adapters.CircularPagerAdapter;
 import com.LocallyGrownStudios.liquidcommunications.ContentProviders.ContactProvider;
 import com.LocallyGrownStudios.liquidcommunications.R;
 import com.LocallyGrownStudios.liquidcommunications.Services.SmsMmsService;
 
 import static android.support.v4.view.ViewPager.*;
-
 
 public class LiquidManager extends Activity {
 
@@ -50,12 +47,13 @@ public class LiquidManager extends Activity {
 
     }
 
-
           OnPageChangeListener  onPageChangeListener = new OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int pageSelected) {
+
                 Log.e("onPageSelected", "pageSelected:" + pageSelected);
+
             }
 
             @Override
@@ -77,6 +75,7 @@ public class LiquidManager extends Activity {
             @Override
             public void onPageScrollStateChanged(int state) {
                 Log.e("onPageScrollStateChanged", "state:" + state);
+
 
 
             }
