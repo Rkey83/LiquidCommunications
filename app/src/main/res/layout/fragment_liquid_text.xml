@@ -6,6 +6,7 @@
     android:scrollbarSize="0dp"
     tools:context=".ContactManager">
 
+    <!-- Header Background Bar -->
     <RelativeLayout
         android:id="@+id/LMheader"
         android:layout_width="fill_parent"
@@ -15,52 +16,61 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <!-- Main View Title -->
         <TextView
             android:id="@+id/LiquidManagerHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
             android:text="@string/liquid_text"
             android:textSize="11pt"
             android:textStyle="bold"
-            android:textColor="#BCBEC0"
-            android:textAlignment="center" />
+            android:textColor="#BCBEC0"/>
 
+        <!-- Left Text -->
         <TextView
             android:id="@+id/QuickConnect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/sub_header_margin_top"
             android:layout_marginLeft="@dimen/sub_header_margin_horiz"
+            android:layout_marginStart="@dimen/sub_header_margin_horiz"
             android:text="@string/quick_connect"
             android:textSize="@dimen/header_sub_text_size"
             android:textStyle="bold"
-            android:textColor="@color/header_sub_text" />
+            android:textColor="@color/header_sub_text"/>
 
+        <!-- Right Text -->
         <TextView
             android:id="@+id/liquidContacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/liquidContacts"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/sub_header_margin_horiz"
+            android:layout_marginEnd="@dimen/sub_header_margin_horiz"
             android:layout_marginTop="@dimen/sub_header_margin_top"
             android:text="@string/liquid_contacts"
             android:textSize="@dimen/header_sub_text_size"
-            android:textColor="@color/header_sub_text"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/header_sub_text"  />
 
+        <!-- Left Arrow -->
         <ImageView
             android:id="@+id/header_arrow_left"
             android:src="@drawable/header_arrow"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/LiquidManagerHeader" />
+            android:layout_toLeftOf="@id/LiquidManagerHeader"
+            android:layout_toStartOf="@id/LiquidManagerHeader"/>
 
+        <!-- Right Arrow -->
         <ImageView
             android:id="@+id/header_arrow_right"
             android:src="@drawable/header_arrow"
@@ -68,8 +78,8 @@
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/LiquidManagerHeader"
             android:layout_toRightOf="@+id/LiquidManagerHeader"
-            android:rotation="180" />
-
+            android:layout_toEndOf="@+id/LiquidManagerHeader"
+            android:rotation="180"/>
 
     </RelativeLayout>
 
@@ -83,6 +93,79 @@
         android:layout_below="@+id/LMheader"
         android:layout_above="@+id/footer" />
 
+    <!-- Footer Container -->
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BF808285"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
 
+        <!-- Text Button -->
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btnNewText"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:text="@string/footer_text"
+            android:textSize="@dimen/footer_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/contact_name"
+            android:background="@drawable/text_input_background"
+            android:onClick="clear" />
+
+        <!-- Email Button -->
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btnNewEmail"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:text="@string/footer_email"
+            android:textSize="@dimen/footer_text_size"
+            android:textColor="@color/contact_name"
+            android:textStyle="bold"
+            android:background="@drawable/text_input_background"
+            android:onClick="clear" />
+
+        <!-- Call Button -->
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btnNewCall"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:text="@string/footer_call"
+            android:textSize="@dimen/footer_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/contact_name"
+            android:background="@drawable/text_input_background"
+            android:onClick="clear" />
+
+        <!-- Social Button -->
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btnNewSocial"
+            android:layout_width="@dimen/footer_button_width"
+            android:layout_height="@dimen/footer_Button_height"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:text="@string/footer_social"
+            android:textSize="@dimen/footer_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/contact_name"
+            android:background="@drawable/text_input_background"
+            android:onClick="clear" />
+
+    </LinearLayout>
 
 </RelativeLayout>
