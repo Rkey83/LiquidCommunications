@@ -41,9 +41,7 @@ public class LiquidManager extends Activity {
             String tyb = cursor.getString(5);
             String kfd = cursor.getString(3);
         }
-
         context.startService(serviceSmsMms);
-
 
     }
 
@@ -75,8 +73,6 @@ public class LiquidManager extends Activity {
             @Override
             public void onPageScrollStateChanged(int state) {
                 Log.e("onPageScrollStateChanged", "state:" + state);
-
-
 
             }
         };
