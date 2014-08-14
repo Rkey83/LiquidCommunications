@@ -18,9 +18,6 @@ public class ContactImporter extends Activity implements View.OnClickListener{
 
     // Class objects
 
-    /// Mark can you see this?????
-
-
     static Context context, cntxContactImporter;
     Button btnImport, btnCancel;
     FirstRunCheck appFirstRun = new FirstRunCheck();
@@ -98,8 +95,8 @@ public class ContactImporter extends Activity implements View.OnClickListener{
 
         importOptions.importContacts();
         importOptions.importContactsOn();
-        Intent activitySmsMmsImpoter = new Intent(context, SmsMmsImporter.class);
-        context.startActivity(activitySmsMmsImpoter);
+        Intent activitySmsMmsImporter = new Intent(context, SmsMmsImporter.class);
+        context.startActivity(activitySmsMmsImporter);
         Intent serviceImportContacts = new Intent(context, ImportContactService.class);
         context.startService(serviceImportContacts);
         actContactImpoter.finish();

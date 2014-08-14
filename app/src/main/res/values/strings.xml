@@ -16,17 +16,32 @@
     <string name="title_activity_sms_mms_importer">SmsMmsImporter</string>
     <string name="title_activity_set_default_app">SetDefaultApp</string>
     <string name="hello_world">Hello world!</string>
-    <string name="sqlContacts">create table contacts (_id INTEGER primary key, LQ_Name TEXT, LQ_ContactPhoto BLOB, LQ_HasNumber INTEGER, LQ_Number TEXT, LQ_Email TEXT, LQ_HasContacted INTEGER, LQ_Contacted INTEGER, LQ_LastContacted DATE)</string>
+
     //header strings
     <string name="quick_connect">QuickConnect</string>
     <string name="liquid_contacts">LiquidContacts</string>
     <string name="liquid_text">LiquidText</string>
-    //footer strings        <string name="footer_text">Text</string>
+
+    //header sub-strings
+    <string name="QC">(QC)</string>
+    <string name="LC">(LC)</string>
+    <string name="LT">(LT)</string>
+
+
+    //footer strings
+
+    <string name="footer_text">Text</string>
     <string name="footer_email">Email</string>
     <string name="footer_social">Social</string>
     <string name="footer_call">Call</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     // Query Contact DataBase
+
+    <string name="sqlContacts">create table contacts (_id INTEGER primary key, LQ_Name TEXT, LQ_ContactPhoto BLOB, LQ_HasNumber INTEGER, LQ_Number TEXT, LQ_Email TEXT, LQ_HasContacted INTEGER, LQ_Contacted INTEGER, LQ_LastContacted DATE)</string>
+    <string name="sqlMms">create table Mms (_id INTEGER primary key, LQ_id INTEGER, LQ_Thread_ID INTEGER, LQ_Date DATE, LQ_Name TEXT, LQ_Number TEXT, LQ_Message TEXT, LQ_Picture BLOB)</string>
+    <string name="sqlSms">create table Sms (_id INTEGER primary key, LQ_id INTEGER, LQ_Thread_ID INTEGER, LQ_Name TEXT, LQ_Number TEXT, LQ_Message TEXT, LQ_Type INTEGER, LQ_Date DATE, LQ_DateSent Date, LQ_HasRead)</string>
+
+
 
     // Stored Phone Types    <string name="strPhoneCustom">_0</string>
     <string name="strPhoneHome">_1</string>

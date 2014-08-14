@@ -44,7 +44,7 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
 
             case 1:
 
-                currentFragment = LiquidContactsFragment.newInstance();
+                currentFragment = LiquidContactsFragment.newInstance(position + 1);
                 return currentFragment;
 
             case 2:
@@ -59,12 +59,12 @@ public class CircularPagerAdapter extends FragmentPagerAdapter {
 
             case 4:
 
-                currentFragment = LiquidContactsFragment.newInstance();
+                currentFragment = LiquidContactsFragment.newInstance(position + 1);
                 return currentFragment;
 
         }
 
-        return LiquidContactsFragment.newInstance();
+        return LiquidContactsFragment.newInstance(position);
     }
 
     @Override

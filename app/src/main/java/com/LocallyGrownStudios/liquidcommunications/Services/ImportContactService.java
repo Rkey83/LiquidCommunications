@@ -1,6 +1,6 @@
 package com.LocallyGrownStudios.liquidcommunications.Services;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -9,11 +9,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.IBinder;
 import android.widget.Toast;
+
 import com.LocallyGrownStudios.liquidcommunications.General.Converters;
-import com.LocallyGrownStudios.liquidcommunications.Helpers.ContactHelper;
-import java.io.ByteArrayOutputStream;
+import com.LocallyGrownStudios.liquidcommunications.Helpers.DataBaseHelper;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,12 @@ import java.util.List;
 import static android.provider.ContactsContract.*;
 import static android.provider.ContactsContract.CommonDataKinds.*;
 
-public class ImportContactService extends Service {
+public class ImportContactService extends IntentService {
 
     // Class Objects
 
     SQLiteDatabase contactDb;
-    ContactHelper contactHelper;
+    DataBaseHelper dataBaseHelper;
     Cursor cursorContacts, cursorPhone, cursorEmail;
     Bitmap btmpContactPhoto, btmpContactImage;
     byte[] bytContactPhoto;
@@ -38,80 +40,97 @@ public class ImportContactService extends Service {
     List<String> listPhoneNumber = new ArrayList<String>();
     List<String> listEmails = new ArrayList<String>();
     InputStream inputStream;
+    Handler handler = new Handler();
 
 
+    // Set an empty constructor for the Service and name it
+
+    public ImportContactService()
+    {
+        super("ImportContactService");
+    }
+
+
+    // on creation of the Service
 
     @Override
     public void onCreate() {
+
         super.onCreate();
     }
-
 
 
     // On start of the Service
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        // Open DataBase and write to it
-
-        contactHelper = new ContactHelper(ImportContactService.this);
-        contactDb = contactHelper.getWritableDatabase();
-        ContentValues contactValues = new ContentValues();
-
-        // Set URI's(tables);
-
-        uriContacts = Contacts.CONTENT_URI;
-        uriPhone = Phone.CONTENT_URI;
-        uriEmail = Email.CONTENT_URI;
-
-        // Contact ID's
-
-        strPhoneId = Phone.CONTACT_ID;
-        strEmailId = Email.CONTACT_ID;
-
-        // Start Contact Cursor and Move to first; (TableToLookIn, Projection, Selection, SelectionArgs, SortBy)
-
-        cursorContacts = getContentResolver().query(uriContacts, null, null, null, null);
-        cursorContacts.moveToFirst();
-
-        // While another Object exists move to the next
-
-        while (cursorContacts.moveToNext()) {
+        return super.onStartCommand(intent, flags, startId);
+    }
 
 
-            // Get contact info
-            getContacts();
+    @Override
+    protected void onHandleIntent(Intent intent) {
 
-            // Set values for DataBase
-            contactValues.put(ContactHelper.contactID, intContactID);
-            contactValues.put(ContactHelper.name, strName);
-            contactValues.put(ContactHelper.hasNumber, intHasNumber);
-            contactValues.put(ContactHelper.contactPhoto, bytContactPhoto);
-            contactValues.put(ContactHelper.hasContacted, intHasContacted);
-            contactValues.put(ContactHelper.numPhone, strAllNumbers);
-            contactValues.put(ContactHelper.numContacted, intTimesContacted);
-            contactValues.put(ContactHelper.lastContacted, strLastContacted);
-            contactValues.put(ContactHelper.email, strAllEmails);
 
-            // Insert values into DataBase
-            contactDb.insertWithOnConflict(ContactHelper.tableContact, null, contactValues, SQLiteDatabase.CONFLICT_REPLACE);
+        if (intent != null) {
 
-            // Clear lists PhoneNumber and Emails
-            listPhoneNumber.clear();
-            listEmails.clear();
+            // Create the DataBase and write to it
+
+            dataBaseHelper = new DataBaseHelper(ImportContactService.this);
+            contactDb = dataBaseHelper.getWritableDatabase();
+            ContentValues valuesContacts = new ContentValues();
+
+            // Set URI's(tables);
+
+            uriContacts = Contacts.CONTENT_URI;
+            uriPhone = Phone.CONTENT_URI;
+            uriEmail = Email.CONTENT_URI;
+
+            // Contact ID's
+
+            strPhoneId = Phone.CONTACT_ID;
+            strEmailId = Email.CONTACT_ID;
+
+            // Start Contact Cursor and Move to first; (TableToLookIn, Projection, Selection, SelectionArgs, SortBy)
+
+            cursorContacts = getContentResolver().query(uriContacts, null, null, null, null);
+            cursorContacts.moveToFirst();
+
+            // While another Object exists move to the next
+
+            while (cursorContacts.moveToNext()) {
+
+                // Get contact info
+                getContacts();
+
+                // Set values for DataBase
+                valuesContacts.put(DataBaseHelper.contactID, intContactID);
+                valuesContacts.put(DataBaseHelper.name, strName);
+                valuesContacts.put(DataBaseHelper.hasNumber, intHasNumber);
+                valuesContacts.put(DataBaseHelper.contactPhoto, bytContactPhoto);
+                valuesContacts.put(DataBaseHelper.hasContacted, intHasContacted);
+                valuesContacts.put(DataBaseHelper.numPhone, strAllNumbers);
+                valuesContacts.put(DataBaseHelper.numContacted, intTimesContacted);
+                valuesContacts.put(DataBaseHelper.lastContacted, strLastContacted);
+                valuesContacts.put(DataBaseHelper.email, strAllEmails);
+
+                // Insert values into DataBase
+                contactDb.insertWithOnConflict(DataBaseHelper.tableContact, null, valuesContacts, SQLiteDatabase.CONFLICT_REPLACE);
+
+                // Clear lists PhoneNumber and Emails
+                listPhoneNumber.clear();
+                listEmails.clear();
+            }
+
+            // Close Contact Cursor
+            cursorContacts.close();
+
+
+            // Make Toast
+            Toast.makeText(this, "Contacts DataBase Created", Toast.LENGTH_LONG).show();
+            stopService(intent);
         }
 
-        // Close Contact Cursor
-        cursorContacts.close();
-
-
-        // Make Toast
-        Toast.makeText(this, "Contacts DataBase Created", Toast.LENGTH_LONG).show();
-        stopService(intent);
-
-        // If called as a Method, return ..
-        return super.onStartCommand(intent, flags, startId);
     }
 
 
@@ -143,22 +162,22 @@ public class ImportContactService extends Service {
 
                 // If Photo exists
 
-                    if (strContactPhoto != null) {
+                if (strContactPhoto != null) {
 
-                        // Get Photo and Convert to Byte[]
+                    // Get Photo and Convert to Byte[]
 
-                        inputStream = Contacts.openContactPhotoInputStream(this.getContentResolver(), ContentUris.withAppendedId(Contacts.CONTENT_URI, intContactID));
-                        btmpContactPhoto = (BitmapFactory.decodeStream(inputStream));
-                        btmpContactImage = Bitmap.createBitmap(btmpContactPhoto);
-                        bytContactPhoto = Converters.getBytes(btmpContactImage);
+                    inputStream = Contacts.openContactPhotoInputStream(this.getContentResolver(), ContentUris.withAppendedId(Contacts.CONTENT_URI, intContactID));
+                    btmpContactPhoto = (BitmapFactory.decodeStream(inputStream));
+                    btmpContactImage = Bitmap.createBitmap(btmpContactPhoto);
+                    bytContactPhoto = Converters.getBytes(btmpContactImage);
 
-                    }
+                }
 
-                    // Otherwise set Photo to null
+                // Otherwise set Photo to null
 
-                    else {
-                        bytContactPhoto = null;
-                    }
+                else {
+                    bytContactPhoto = null;
+                }
 
                 // Check whether contact has been contacted
 
@@ -166,12 +185,12 @@ public class ImportContactService extends Service {
 
 
                 // If yes set to 1
-                if (intTimesContacted > 0){
+                if (intTimesContacted > 0) {
                     intHasContacted = 1;
                 }
 
                 // Otherwise set to 0
-                else{
+                else {
                     intHasContacted = 0;
                 }
 
@@ -180,7 +199,7 @@ public class ImportContactService extends Service {
 
                 // If contact has been contacted, convert long to a Date
                 if (lnglastContacted != 0) {
-                    strLastContacted = Converters.getDate(lnglastContacted, "dd/MM/yyyy hh:mm:ss.SSS");
+                    strLastContacted = Converters.getDate(lnglastContacted, "EEE MMM dd HH:mm:ss zzz yyyy");
                 }
 
                 // Otherwise set to 0
@@ -192,6 +211,7 @@ public class ImportContactService extends Service {
 
                 strPhoneType = cursorPhone.getString(cursorPhone.getColumnIndex(Phone.TYPE));
                 strPhoneNumber = cursorPhone.getString(cursorPhone.getColumnIndex(Phone.NUMBER));
+                strPhoneNumber = Converters.stripNumberFormatiing(strPhoneNumber);
                 listPhoneNumber.add(strPhoneNumber + "_" + strPhoneType);
 
                 // For each number contact has, get Number and Type and add to the Array List
@@ -199,6 +219,7 @@ public class ImportContactService extends Service {
                 while (cursorPhone.moveToNext()) {
                     strPhoneType = cursorPhone.getString(cursorPhone.getColumnIndex(Phone.TYPE));
                     strPhoneNumber = cursorPhone.getString(cursorPhone.getColumnIndex(Phone.NUMBER));
+                    strPhoneNumber = Converters.stripNumberFormatiing(strPhoneNumber);
                     listPhoneNumber.add(strPhoneNumber + "_" + strPhoneType);
 
                 }
@@ -206,8 +227,7 @@ public class ImportContactService extends Service {
                 // Set all values to the Array List and convert it to a String
                 arrNumbers = listPhoneNumber.toArray(new String[listPhoneNumber.size()]);
                 strAllNumbers = Converters.convertArrayToString(arrNumbers);
-            }
-            else {
+            } else {
 
                 // Otherwise if contact does not have a Number set to none
                 strAllNumbers = null;
@@ -216,18 +236,18 @@ public class ImportContactService extends Service {
 
             // Close Phone Cursor and Open Email Cursor
             cursorPhone.close();
-            cursorEmail = getContentResolver().query(uriEmail, null,strEmailId + " = ?", new String[] {Integer.toString(intContactID)}, null );
+            cursorEmail = getContentResolver().query(uriEmail, null, strEmailId + " = ?", new String[]{Integer.toString(intContactID)}, null);
 
             // If contact has an Email move to first position
 
-            if (cursorEmail.moveToFirst()){
+            if (cursorEmail.moveToFirst()) {
 
                 // Get Email and set to an Array List
                 strEmail = cursorEmail.getString(cursorEmail.getColumnIndex(Email.DATA));
                 listEmails.add(strEmail);
 
                 //For each Email contact has, set Email to the ArrayList
-                while(cursorEmail.moveToNext()){
+                while (cursorEmail.moveToNext()) {
                     strEmail = cursorEmail.getString(cursorEmail.getColumnIndex(Email.DATA));
                     listEmails.add(strEmail);
                 }
