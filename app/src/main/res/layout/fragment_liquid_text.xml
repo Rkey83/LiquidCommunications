@@ -79,7 +79,7 @@
 
     </RelativeLayout>
 
-    <ListView
+  <ListView
         android:id="@+id/contactListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -88,6 +88,7 @@
         android:fastScrollEnabled="false"
         android:layout_below="@+id/LMheader"
         android:layout_above="@+id/footer" />
+
 
     <!-- Footer Container -->
     <LinearLayout
@@ -163,5 +164,6 @@
             android:onClick="clear" />
 
     </LinearLayout>
+
 
 </RelativeLayout>

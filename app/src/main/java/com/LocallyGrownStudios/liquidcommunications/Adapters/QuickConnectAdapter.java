@@ -87,6 +87,7 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
         objBean = contacts.get(position);
         holder.name = (TextView) view.findViewById(R.id.txtContactName);
         holder.phoneNo = (TextView) view.findViewById(R.id.txtContactNumber);
+        holder.ThreadID = (TextView) view.findViewById(R.id.qc_threadID);
         holder.message = (TextView) view.findViewById(R.id.txtLastContact);
         holder.phoneNo.setAutoLinkMask(Linkify.ALL);
         QuickContactBadge badgeSmall = (QuickContactBadge) view.findViewById(R.id.contactBadge);
@@ -127,11 +128,13 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
                         LiquidManager liquidManager = new LiquidManager();
                         holder.message.performHapticFeedback(1);
                         Log.i("MyTag", "Text message is pressed, visible in LogCat");
-                        String textNumber = holder.phoneNo.getText().toString();
+                        String threadID = holder.ThreadID.getText().toString();
+                        String streamNumber = holder.phoneNo.getText().toString();
+                        String streamName = holder.name.getText().toString();
                         Intent intentTextMessages = new Intent(v.getContext(), SmsMmsStream.class);
-                        intentTextMessages.putExtra("senderNumber" ,textNumber);
-                        intentTextMessages.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intentTextMessages.putExtra("saver", "saved");
+                        intentTextMessages.putExtra("threadID" ,threadID);
+                        intentTextMessages.putExtra("senderName", streamName);
+                        intentTextMessages.putExtra("senderNumber", streamNumber);
                         activity.finish();
                         v.getContext().startActivity(intentTextMessages);
                     } else {
@@ -192,6 +195,12 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
             holder.message.setText(Html.fromHtml(objBean.LastTextGet()));
         }
 
+        // Set ThreadID
+
+        if (holder.ThreadID != null && null != objBean.IDGet() && objBean.IDGet().trim().length() > 0) {
+            holder.ThreadID.setText(Html.fromHtml(objBean.IDGet()));
+        }
+
 
         // Set the Contact Badge and Image
 
@@ -240,7 +249,7 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
 
 
     public class ViewHolder {
-        public TextView name, phoneNo, message;
+        public TextView name, phoneNo, message, ThreadID;
     }
 }
 

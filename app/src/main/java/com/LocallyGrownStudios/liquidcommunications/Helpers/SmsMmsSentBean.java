@@ -7,7 +7,7 @@ public class SmsMmsSentBean {
 
     private String smsMessage, smsDate, smsNumber;
     private int ID, smsThreadID, smsType;
-    Bitmap smsContactPhoto;
+    Bitmap smsContactPhoto, mmsImage;
 
 
     public String getSmsNumber() { return smsNumber; }
@@ -19,6 +19,12 @@ public class SmsMmsSentBean {
     }
 
     public void setSmsContactPhoto(Bitmap smsContactPhoto) { this.smsContactPhoto = smsContactPhoto;}
+
+    public Bitmap getMmsImage() {
+        return mmsImage;
+    }
+
+    public void setMmsImage(Bitmap mmsImage) { this.mmsImage = mmsImage;}
 
     public String getSmsMessage() {
         return smsMessage;

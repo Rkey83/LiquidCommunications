@@ -6,8 +6,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.animation.Animator;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
@@ -38,4 +41,11 @@ public class LiquidTextFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+
+    }
 }

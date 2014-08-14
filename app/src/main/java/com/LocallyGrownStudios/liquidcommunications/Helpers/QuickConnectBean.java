@@ -9,13 +9,13 @@ public class QuickConnectBean {
     private String name;
     private String phoneNo;
     private String lastText;
-    private Uri contactID;
+    private String contactID;
     private Bitmap contactPhoto;
     private Drawable defaultPhoto;
 
-    public Uri IDGet(){ return contactID;}
+    public String IDGet(){ return contactID;}
 
-    public void IDSet(Uri contactID){ this.contactID = contactID; }
+    public void IDSet(String contactID){ this.contactID = contactID; }
 
     public String Nameget() {
         return name;

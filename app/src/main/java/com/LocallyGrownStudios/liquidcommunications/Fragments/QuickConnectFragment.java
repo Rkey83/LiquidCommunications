@@ -40,7 +40,7 @@ public class QuickConnectFragment extends Fragment {
     Context context;
     private List<QuickConnectBean> listQuickConnect = new ArrayList<QuickConnectBean>();
     public static ListView lstvwQuickConnect;
-    String strContactsNumber, strRawNumber, strRecentMessage, mmsMessage, smsMessage;
+    String strContactsNumber, strRawNumber, strRecentMessage, mmsMessage, smsMessage, threadID;
     Date smsDate, mmsDate;
     QuickConnectAdapter quickConnectAdapter;
 
@@ -155,6 +155,7 @@ public class QuickConnectFragment extends Fragment {
 
             // Set Values found to an array
 
+            beanQuickConnect.IDSet(threadID);
             beanQuickConnect.Nameset(strContactsName);
             beanQuickConnect.PhoneNoset(strContactsNumber);
             beanQuickConnect.LastTextSet(strRecentMessage);
@@ -206,14 +207,19 @@ public class QuickConnectFragment extends Fragment {
         Cursor cursorMms = context.getContentResolver().query(MmsProvider.mmsUri, null, "LQ_Number=" + strRawNumber, null, "LQ_Date" + " ASC");
 
         if (cursorSms.moveToFirst()) {
+
+            threadID = cursorSms.getString(2);
             smsMessage = "Message :" + " " + cursorSms.getString(5);
             String date = cursorSms.getString(7);
             smsDate = Converters.convertStringToDate(date);
 
 
         }
-        if (cursorMms.moveToFirst()) {
+        if (cursorMms.moveToFirst())
+        {
             int mmsType = cursorMms.getInt(8);
+            threadID = cursorMms.getString(2);
+
             if (mmsType == 1) {
                 mmsMessage = cursorMms.getString(6);
                 String date = cursorMms.getString(3);

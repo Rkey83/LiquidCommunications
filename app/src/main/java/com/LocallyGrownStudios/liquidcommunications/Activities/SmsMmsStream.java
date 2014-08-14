@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -39,7 +41,7 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
 
     // Set Class Variables
     public Context context;
-    String textSender, strSmsName;
+    String textSender, strSmsName, textThread, textName;
     String returnNumber;
     public ArrayList<Object> textlist = new ArrayList<Object>();
     static SmsMmsStreamAdapter adapter;
@@ -48,6 +50,8 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
     Date smsDate, mmsDate;
     String body;
     EditText messageToSend;
+    byte[] bytes;
+    Bitmap mmsImage;
     Cursor cursorSms, cursorMms;
     int smsCount, mmsCount;
 
@@ -111,14 +115,16 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
 
         if (extras != null) {
             textSender = extras.getString("senderNumber");
+            textName = extras.getString("senderName");
+            textThread = extras.getString("threadID");
         }
 
         ContentValues updateValues = new ContentValues();
         textSender = Converters.stripNumberFormatiing(textSender);
         String covnersationNumber = Converters.formatPhoneNumber(textSender);
         streamNumber.setText(covnersationNumber);
-        cursorSms = context.getContentResolver().query(SmsProvider.smsUri, null, "LQ_Number=" + textSender , null, "LQ_id" + " ASC");
-        cursorMms = context.getContentResolver().query(MmsProvider.mmsUri, null, "LQ_Number=" + textSender , null, "LQ_id" + " ASC");
+        cursorSms = context.getContentResolver().query(SmsProvider.smsUri, null, "LQ_Thread_ID=" + textThread , null, "LQ_id" + " ASC");
+        cursorMms = context.getContentResolver().query(MmsProvider.mmsUri, null, "LQ_Thread_ID=" + textThread , null, "LQ_id" + " ASC");
 
         mmsCount = cursorMms.getCount();
         smsCount = cursorSms.getCount();
@@ -141,9 +147,13 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
                     else if (smsDate.after(mmsDate)) {
 
                         getMms();
-                        cursorMms.moveToNext();
                         cursorSms.moveToPrevious();
+                        if (cursorMms.getPosition() < mmsCount){
+
+                            cursorMms.moveToNext();
+                        }
                         if (cursorSms.getPosition() == 0){
+
                             cursorSms.moveToPosition(-1);
                         }
 
@@ -194,10 +204,6 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
 
         adapter = (new SmsMmsStreamAdapter(getApplicationContext(), 0, textlist));
         listviewTextMessages.setAdapter(adapter);
-        SmsMmsReceivedBean rec = new SmsMmsReceivedBean();
-        rec.setSmsMessage(returnNumber);
-        cursorSms.moveToFirst();
-        streamName.setText(strSmsName);
         cursorSms.close();
         cursorMms.close();
     }
@@ -248,29 +254,44 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
 
         if (cursorMms.getPosition() < mmsCount) {
 
+            SmsMmsReceivedBean rec = new SmsMmsReceivedBean();
             int mmsType = cursorMms.getInt(8);
 
-            if (mmsType == 1) {
+            switch (mmsType){
 
-                SmsMmsReceivedBean rec = new SmsMmsReceivedBean();
-                mmsMessage = cursorMms.getString(6);
-                rec.setSmsMessage(mmsMessage);
-                textlist.add(rec);
-            }
-            if (mmsType == 2) {
+                case 1:
 
-                SmsMmsReceivedBean rec = new SmsMmsReceivedBean();
-                mmsMessage = "Message : Click here to view image";
-                rec.setSmsMessage(mmsMessage);
-                textlist.add(rec);
-            }
-            if (mmsType == 3) {
+                    mmsMessage = cursorMms.getString(6);
 
-                SmsMmsReceivedBean rec = new SmsMmsReceivedBean();
-                mmsMessage = cursorMms.getString(6);
-                rec.setSmsMessage(mmsMessage);
-                textlist.add(rec);
+                    rec.setSmsMessage(mmsMessage);
+
+                    break;
+
+                case 2:
+
+                    bytes = cursorMms.getBlob(7);
+                    mmsImage = Converters.getImage(bytes);
+                    mmsImage = Bitmap.createBitmap(mmsImage);
+
+
+
+                    break;
+
+                case 3:
+
+                    mmsMessage = cursorMms.getString(6);
+                    bytes = cursorMms.getBlob(7);
+                    mmsImage = Converters.getImage(bytes);
+                    mmsImage = Bitmap.createBitmap(mmsImage);
+
+
+                    rec.setSmsMessage(mmsMessage);
+
+
+                    break;
+
             }
+            textlist.add(rec);
         }
     }
 
