@@ -1,27 +1,27 @@
 package com.LocallyGrownStudios.liquidcommunications.Activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.LocallyGrownStudios.liquidcommunications.Adapters.CircularPagerAdapter;
-import com.LocallyGrownStudios.liquidcommunications.ContentProviders.ContactProvider;
 import com.LocallyGrownStudios.liquidcommunications.R;
 import com.LocallyGrownStudios.liquidcommunications.Services.SmsMmsService;
-
 import static android.support.v4.view.ViewPager.*;
 
 public class LiquidManager extends Activity {
 
-    private int previousState, currentState;
+
+    private int currentState;
     private ViewPager mainPager;
     CircularPagerAdapter testAdapter;
-    Fragment currentFragment;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle position) {
@@ -33,7 +33,9 @@ public class LiquidManager extends Activity {
         mainPager.setAdapter(testAdapter);
         mainPager.setCurrentItem(2);
         mainPager.setOnPageChangeListener(onPageChangeListener);
+        mainPager.setOffscreenPageLimit(4);
         Intent serviceSmsMms = new Intent(context, SmsMmsService.class);
+<<<<<<< HEAD
         Cursor cursor = getContentResolver().query(ContactProvider.contactUri, null, null, null, null);
 
         while (cursor.moveToNext()) {
@@ -43,6 +45,9 @@ public class LiquidManager extends Activity {
         }
         context.startService(serviceSmsMms);
 
+=======
+        context.startService(serviceSmsMms);
+>>>>>>> e9056c0fc66066cd8bb2c6e29967665c6496ff6b
     }
 
           OnPageChangeListener  onPageChangeListener = new OnPageChangeListener() {
@@ -60,11 +65,11 @@ public class LiquidManager extends Activity {
                 Log.e("onPageScrolled", "pageSelected" + pageSelected + ",positionOffset:" + positionOffset + ",positionOffsetPixel:" + positionOffsetPixel);
                 currentState = mainPager.getCurrentItem();
 
-               if (currentState == 0 && positionOffset < .01){
+               if (currentState == 0 && positionOffset < .1){
                    mainPager.setCurrentItem(3, false);
                }
 
-               if (currentState == 4 && positionOffset > .99){
+               if (currentState == 4 && positionOffset > .9){
                    mainPager.setCurrentItem(1, false);
                }
 
@@ -76,5 +81,16 @@ public class LiquidManager extends Activity {
 
             }
         };
+
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+
+    }
+
 }
 
