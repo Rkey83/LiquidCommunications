@@ -8,17 +8,17 @@ import android.net.Uri;
 
 import com.LocallyGrownStudios.liquidcommunications.Helpers.DataBaseHelper;
 
-public final class ContactProvider extends ContentProvider {
+public class MmsProvider extends ContentProvider {
 
-    public static final String Contact_Table = "Contacts";
-    public static final String AUTHORITY = "content://com.LocallyGrownStudios.ContentProviders.ContactProvider";
-    public static final  Uri contactUri = Uri.parse(AUTHORITY);
+    public static final String Sms_Table = "Sms";
+    public static final String Authority = "content://com.LocallyGrownStudios.ContentProviders.MmsProvider";
+    public static final Uri mmsUri = Uri.parse(Authority);
     DataBaseHelper dataBaseHelper;
-    SQLiteDatabase contactDb;
+    SQLiteDatabase mmsDb;
 
-    public ContactProvider() {
+
+    public MmsProvider() {
     }
-
 
     @Override
     public boolean onCreate() {
@@ -27,51 +27,38 @@ public final class ContactProvider extends ContentProvider {
         return true;
     }
 
-
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         dataBaseHelper = new DataBaseHelper(getContext());
-        contactDb = dataBaseHelper.getWritableDatabase();
-        Cursor cursor = contactDb.query(DataBaseHelper.tableContact,projection,selection,selectionArgs,null,null,sortOrder);
+        mmsDb = dataBaseHelper.getWritableDatabase();
+        Cursor cursor = mmsDb.query(DataBaseHelper.tableMms,projection,selection,selectionArgs,null,null,sortOrder);
+
 
         return cursor;
     }
-
-
-    @Override
-    public Uri insert(Uri uri, ContentValues values) {
-
-        values = new ContentValues();
-
-
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-
-    @Override
-    public int update(Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-
     @Override
     public String getType(Uri uri) {
-
-        if (uri.getLastPathSegment() == null){
+        if (uri.getLastPathSegment() == null) {
             return "vnd.android.cursor.item/vnd.LocallyGrownStudios.Provider";
-        }
-        else{
+        } else {
             return "vnd.android.cursor.dir/vnd.LocallyGrownStudios.Provider";
         }
     }
 
+    @Override
+    public Uri insert(Uri uri, ContentValues values) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
+    @Override
+    public int update(Uri uri, ContentValues values, String selection,String[] selectionArgs) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

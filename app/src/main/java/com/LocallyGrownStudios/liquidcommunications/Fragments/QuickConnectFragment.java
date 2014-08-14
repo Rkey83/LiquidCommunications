@@ -2,6 +2,7 @@ package com.LocallyGrownStudios.liquidcommunications.Fragments;
 
 
 // Import these resources
+
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,18 +10,26 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.animation.AnimatorSet;
 
 import com.LocallyGrownStudios.liquidcommunications.Adapters.QuickConnectAdapter;
 import com.LocallyGrownStudios.liquidcommunications.ContentProviders.ContactProvider;
+import com.LocallyGrownStudios.liquidcommunications.ContentProviders.MmsProvider;
+import com.LocallyGrownStudios.liquidcommunications.ContentProviders.SmsProvider;
 import com.LocallyGrownStudios.liquidcommunications.General.Converters;
 import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
 import com.LocallyGrownStudios.liquidcommunications.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class QuickConnectFragment extends Fragment {
@@ -31,9 +40,9 @@ public class QuickConnectFragment extends Fragment {
     Context context;
     private List<QuickConnectBean> listQuickConnect = new ArrayList<QuickConnectBean>();
     public static ListView lstvwQuickConnect;
-    String strContactsNumber;
-
-
+    String strContactsNumber, strRawNumber, strRecentMessage, mmsMessage, smsMessage;
+    Date smsDate, mmsDate;
+    QuickConnectAdapter quickConnectAdapter;
 
     // Method to create a new instance of the fragment from another class
 
@@ -48,38 +57,46 @@ public class QuickConnectFragment extends Fragment {
     // On the creation of the view find the following layout
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.e("onCreateView", "Create View");
 
         context = this.getActivity();
         View viewQC = inflater.inflate(R.layout.fragment_quick_connect, container, false);
-
-
         return viewQC;
     }
-
 
     // When the Fragment has been created
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        Log.e("onViewCreated", "View Created");
+
         // Create View, get Context and XML
         super.onViewCreated(view, savedInstanceState);
         context = this.getActivity();
         lstvwQuickConnect = (ListView) view.findViewById(R.id.contactListView);
 
-        // Get Contacts to fill QuickConnect
+        // If the view does not have a saved state
+        if (savedInstanceState == null) {
 
-        GetContacts();
+            try {
 
-        // Send the values to the list adapter
 
-        QuickConnectAdapter quickConnectAdapter = new QuickConnectAdapter(this.getActivity(), R.layout.list_item_quick_connect, listQuickConnect);
-        lstvwQuickConnect.setAdapter(quickConnectAdapter);
+                // Get Contacts to fill QuickConnect
 
+                GetContacts();
+
+                // Send the values to the list adapter
+
+                quickConnectAdapter = new QuickConnectAdapter(this.getActivity(), R.layout.list_item_quick_connect, listQuickConnect);
+                lstvwQuickConnect.setAdapter(quickConnectAdapter);
+            } catch (Exception e) {
+
+            }
+        }
     }
-
-
 
     // Method to get contact info for QuickConnect
 
@@ -97,13 +114,16 @@ public class QuickConnectFragment extends Fragment {
 
             // For each entry in the database that matches our search criteria
 
-            QuickConnectBean objContact = new QuickConnectBean();
+            QuickConnectBean beanQuickConnect = new QuickConnectBean();
 
             // Get the entry from the column LQ_Number
-           strContactsNumber = cursor.getString(4);
+            strContactsNumber = cursor.getString(4);
 
             // Run Method getContactsPhoneNumber using the data retrieved
             getContactsPhoneNumber();
+
+            // Run Method getMessage
+            getMessage();
 
             // Get the entry from the column LQ_Name
             String strContactsName = cursor.getString(1);
@@ -123,30 +143,30 @@ public class QuickConnectFragment extends Fragment {
             if (bytContactPhoto != null) {
                 btmpContactPhoto = BitmapFactory.decodeByteArray(bytContactPhoto, 0, bytContactPhoto.length);
                 btmpContactPhoto = Bitmap.createScaledBitmap(btmpContactPhoto, 124, 124, true);
-                objContact.ContactPhotoSet(btmpContactPhoto);
+                btmpContactPhoto = Converters.adjustOpacity(btmpContactPhoto, 215);
+                beanQuickConnect.ContactPhotoSet(btmpContactPhoto);
             }
 
             // Otherwise set contacts photo to default image
             else {
-               Drawable drwDefaultImage = getResources().getDrawable(R.drawable.default_contact_image);
-                objContact.DefaultPhotoSet(drwDefaultImage);
+                Drawable drwDefaultImage = getResources().getDrawable(R.drawable.default_contact_image);
+                beanQuickConnect.DefaultPhotoSet(drwDefaultImage);
             }
 
             // Set Values found to an array
 
-            objContact.Nameset(strContactsName);
-            objContact.PhoneNoset(strContactsNumber);
-            objContact.LastTextSet(strContactsEmailAddress);
+            beanQuickConnect.Nameset(strContactsName);
+            beanQuickConnect.PhoneNoset(strContactsNumber);
+            beanQuickConnect.LastTextSet(strRecentMessage);
 
             // Add the array to a list
 
-            listQuickConnect.add(objContact);
+            listQuickConnect.add(beanQuickConnect);
         }
 
         // Close the cursor
         cursor.close();
     }
-
 
     // Method to parse and format phone numbers
 
@@ -171,8 +191,95 @@ public class QuickConnectFragment extends Fragment {
 
             }
 
+            strRawNumber = strContactsNumber;
             // Once the phone number has been parsed, format the number for display
-           strContactsNumber = Converters.formatPhoneNumber(strContactsNumber);
+            strContactsNumber = Converters.formatPhoneNumber(strContactsNumber);
         }
+    }
+    public void getMessage() {
+
+        strRawNumber = Converters.stripNumberFormatiing(strRawNumber);
+        mmsDate = null;
+        smsDate = null;
+
+        Cursor cursorSms = context.getContentResolver().query(SmsProvider.smsUri, null, "LQ_Number=" + strRawNumber, null, "LQ_id" + " DESC");
+        Cursor cursorMms = context.getContentResolver().query(MmsProvider.mmsUri, null, "LQ_Number=" + strRawNumber, null, "LQ_Date" + " ASC");
+
+        if (cursorSms.moveToFirst()) {
+            smsMessage = "Message :" + " " + cursorSms.getString(5);
+            String date = cursorSms.getString(7);
+            smsDate = Converters.convertStringToDate(date);
+
+
+        }
+        if (cursorMms.moveToFirst()) {
+            int mmsType = cursorMms.getInt(8);
+            if (mmsType == 1) {
+                mmsMessage = cursorMms.getString(6);
+                String date = cursorMms.getString(3);
+                mmsDate = Converters.convertStringToDate(date);
+            }
+            if (mmsType == 2) {
+                String date = cursorMms.getString(3);
+                mmsDate = Converters.convertStringToDate(date);
+                mmsMessage = "Message : Click here to view image";
+            }
+            if (mmsType == 3) {
+                mmsMessage = cursorMms.getString(6);
+                String date = cursorMms.getString(3);
+                mmsDate = Converters.convertStringToDate(date);
+            }
+
+        }
+
+        if (mmsDate != null) {
+            if (mmsDate.after(smsDate)) {
+                strRecentMessage = mmsMessage;
+            } else {
+                strRecentMessage = smsMessage;
+            }
+        }
+
+        if (smsDate != null) {
+            strRecentMessage = smsMessage;
+        }
+
+        else {
+            strRecentMessage = "No Messages";
+
+        }
+
+        cursorSms.close();
+
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        Log.e("onRestore", "View Restored");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume", "View Resumed");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.e("onSave", "View Saved");
+    }
+
+    @Override
+    public void onDestroyView() {
+        // Save ListView state
+        Parcelable state = lstvwQuickConnect.onSaveInstanceState();
+
+        // Set new items
+        lstvwQuickConnect.setAdapter(quickConnectAdapter);
+        super.onDestroyView();
     }
 }

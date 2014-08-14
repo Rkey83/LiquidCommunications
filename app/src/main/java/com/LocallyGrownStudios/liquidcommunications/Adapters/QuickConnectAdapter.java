@@ -19,9 +19,12 @@ package com.LocallyGrownStudios.liquidcommunications.Adapters;
         import android.widget.Button;
         import android.widget.ImageView;
         import android.widget.QuickContactBadge;
+        import android.widget.RelativeLayout;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import com.LocallyGrownStudios.liquidcommunications.Activities.LiquidManager;
+        import com.LocallyGrownStudios.liquidcommunications.Activities.SmsMmsStream;
         import com.LocallyGrownStudios.liquidcommunications.Fragments.QuickConnectFragment;
         import com.LocallyGrownStudios.liquidcommunications.Helpers.QuickConnectBean;
         import com.LocallyGrownStudios.liquidcommunications.R;
@@ -59,13 +62,14 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
     // Get Data and Set it to View
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
 
 
         // Set the View and Inflate Local Data
 
         View view = convertView;
         final ViewHolder holder;
+
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(row, null);
@@ -110,6 +114,9 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
         });
 
 
+
+
+
         // onClick Listener for Text Message Field
 
         holder.message.setOnLongClickListener(new Button.OnLongClickListener() {
@@ -117,13 +124,16 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
             public boolean onLongClick(View v) {
                 try {
                     if (holder.message.getText().toString().contains(":")) {
+                        LiquidManager liquidManager = new LiquidManager();
                         holder.message.performHapticFeedback(1);
                         Log.i("MyTag", "Text message is pressed, visible in LogCat");
-                      //  String textNumber = holder.phoneNo.getText().toString();
-                     //   Intent intentTextMessages = new Intent(v.getContext(), TextManager.class);
-                     //   intentTextMessages.putExtra("senderNumber" ,textNumber);
+                        String textNumber = holder.phoneNo.getText().toString();
+                        Intent intentTextMessages = new Intent(v.getContext(), SmsMmsStream.class);
+                        intentTextMessages.putExtra("senderNumber" ,textNumber);
+                        intentTextMessages.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intentTextMessages.putExtra("saver", "saved");
                         activity.finish();
-                    //    v.getContext().startActivity(intentTextMessages);
+                        v.getContext().startActivity(intentTextMessages);
                     } else {
                         holder.message.performHapticFeedback(1);
                         Log.i("MyTag", "Text message is pressed, visible in LogCat");

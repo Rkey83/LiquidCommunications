@@ -6,6 +6,8 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.text.Html;
@@ -185,6 +187,7 @@ public class LiquidContactsAdapter extends ArrayAdapter<LiquidContactsBean> {
         // If value from LiquidCommunicationBean is not empty, Set the Contact Badge and Image
 
         if (badgeSmall != null && objBean.ConctactPhotoGet() != null && objBean.ConctactPhotoGet().getByteCount() > 0) {
+
             contactImage.setImageBitmap(objBean.ConctactPhotoGet());
             badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
             badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
@@ -192,6 +195,7 @@ public class LiquidContactsAdapter extends ArrayAdapter<LiquidContactsBean> {
         }
         else
         {
+            Drawable drawable = objBean.DefaultPhotoGet();
             contactImage.setImageDrawable(objBean.DefaultPhotoGet());
             badgeSmall.assignContactFromPhone(objBean.PhoneNoget(), true);
             badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);

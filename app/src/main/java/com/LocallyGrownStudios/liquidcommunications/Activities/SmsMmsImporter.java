@@ -13,6 +13,7 @@ import com.LocallyGrownStudios.liquidcommunications.General.FirstRunCheck;
 import com.LocallyGrownStudios.liquidcommunications.General.ImportOptions;
 import com.LocallyGrownStudios.liquidcommunications.R;
 import com.LocallyGrownStudios.liquidcommunications.Services.ImportContactService;
+import com.LocallyGrownStudios.liquidcommunications.Services.ImportSmsMmsService;
 
 public class SmsMmsImporter extends Activity implements View.OnClickListener{
 
@@ -66,6 +67,9 @@ public class SmsMmsImporter extends Activity implements View.OnClickListener{
         Intent startSetDefault = new Intent(context, SetDefaultApp.class);
         actSmsMmsImporter.finish();
         context.startActivity(startSetDefault);
+        Intent serviceImportSmsMms = new Intent(context, ImportSmsMmsService.class);
+        context.startService(serviceImportSmsMms);
+        actSmsMmsImporter.finish();
 
     }
 }
