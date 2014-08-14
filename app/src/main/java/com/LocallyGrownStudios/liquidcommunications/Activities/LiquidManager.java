@@ -35,19 +35,7 @@ public class LiquidManager extends Activity {
         mainPager.setOnPageChangeListener(onPageChangeListener);
         mainPager.setOffscreenPageLimit(4);
         Intent serviceSmsMms = new Intent(context, SmsMmsService.class);
-<<<<<<< HEAD
-        Cursor cursor = getContentResolver().query(ContactProvider.contactUri, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            String avb = cursor.getString(1);
-            String tyb = cursor.getString(5);
-            String kfd = cursor.getString(3);
-        }
         context.startService(serviceSmsMms);
-
-=======
-        context.startService(serviceSmsMms);
->>>>>>> e9056c0fc66066cd8bb2c6e29967665c6496ff6b
     }
 
           OnPageChangeListener  onPageChangeListener = new OnPageChangeListener() {
@@ -78,6 +66,8 @@ public class LiquidManager extends Activity {
             @Override
             public void onPageScrollStateChanged(int state) {
                 Log.e("onPageScrollStateChanged", "state:" + state);
+
+
 
             }
         };
