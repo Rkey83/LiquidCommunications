@@ -130,6 +130,8 @@ public class QuickConnectAdapter extends ArrayAdapter<QuickConnectBean> {
                         String textNumber = holder.phoneNo.getText().toString();
                         Intent intentTextMessages = new Intent(v.getContext(), SmsMmsStream.class);
                         intentTextMessages.putExtra("senderNumber" ,textNumber);
+                        intentTextMessages.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intentTextMessages.putExtra("saver", "saved");
                         activity.finish();
                         v.getContext().startActivity(intentTextMessages);
                     } else {

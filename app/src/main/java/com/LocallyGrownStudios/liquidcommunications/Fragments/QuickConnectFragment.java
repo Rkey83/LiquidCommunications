@@ -92,8 +92,7 @@ public class QuickConnectFragment extends Fragment {
 
                 quickConnectAdapter = new QuickConnectAdapter(this.getActivity(), R.layout.list_item_quick_connect, listQuickConnect);
                 lstvwQuickConnect.setAdapter(quickConnectAdapter);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -258,6 +257,13 @@ public class QuickConnectFragment extends Fragment {
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         Log.e("onRestore", "View Restored");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume", "View Resumed");
     }
 
     @Override

@@ -46,7 +46,7 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
     ListView listviewTextMessages;
     String sendersNumber, mmsMessage, strSmsDate, strMmsDate;
     Date smsDate, mmsDate;
-    String body;
+    String body, saved;
     EditText messageToSend;
     Cursor cursorSms, cursorMms;
     int smsCount, mmsCount;
@@ -57,6 +57,7 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
                 Bundle bundle = intent.getExtras();
+                saved = intent.getStringExtra("saver");
                 Object[] pdus = (Object[]) bundle.get("pdus");
                 SmsMessage[] messages = new SmsMessage[pdus.length];
                 for (int i = 0; i < pdus.length; i++) {
@@ -306,6 +307,8 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
         finish();
         Intent intent = new Intent(SmsMmsStream.this, LiquidManager.class);
         intent.putExtra("savedInstanceState" , "true");
+        intent.putExtra("saver", saved);
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         this.startActivity(intent);
         unregisterReceiver(smsStream);
     }
