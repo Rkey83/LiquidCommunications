@@ -38,6 +38,9 @@ public class LiquidManager extends Activity {
         context.startService(serviceSmsMms);
     }
 
+    // comment for mark
+
+
           OnPageChangeListener  onPageChangeListener = new OnPageChangeListener() {
 
             @Override
