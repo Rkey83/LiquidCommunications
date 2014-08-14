@@ -35,17 +35,10 @@ public class LiquidManager extends Activity {
         testAdapter = new CircularPagerAdapter(getFragmentManager());
         mainPager.setAdapter(testAdapter);
         mainPager.setCurrentItem(2);
+        mainPager.setOffscreenPageLimit(4);
         mainPager.setOnPageChangeListener(onPageChangeListener);
         Intent serviceSmsMms = new Intent(context, SmsMmsService.class);
         Cursor cursor = getContentResolver().query(ContactProvider.contactUri, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            String avb = cursor.getString(1);
-            String tyb = cursor.getString(5);
-            String kfd = cursor.getString(3);
-        }
-
-        context.startService(serviceSmsMms);
 
 
     }
@@ -64,11 +57,11 @@ public class LiquidManager extends Activity {
                 Log.e("onPageScrolled", "pageSelected" + pageSelected + ",positionOffset:" + positionOffset + ",positionOffsetPixel:" + positionOffsetPixel);
                 currentState = mainPager.getCurrentItem();
 
-               if (currentState == 0 && positionOffset < .01){
+               if (currentState == 0 && positionOffset < .1){
                    mainPager.setCurrentItem(3, false);
                }
 
-               if (currentState == 4 && positionOffset > .99){
+               if (currentState == 4 && positionOffset > .9){
                    mainPager.setCurrentItem(1, false);
                }
 
