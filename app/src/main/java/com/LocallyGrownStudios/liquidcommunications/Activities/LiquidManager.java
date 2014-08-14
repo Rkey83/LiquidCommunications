@@ -21,15 +21,12 @@ import static android.support.v4.view.ViewPager.*;
 
 public class LiquidManager extends Activity {
 
-    private int previousState, currentState;
     private ViewPager mainPager;
     CircularPagerAdapter testAdapter;
-    Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle position) {
         super.onCreate(position);
-        Context context = this;
         setContentView(R.layout.activity_liquid_manager);
         mainPager = (ViewPager) findViewById(R.id.pager);
         testAdapter = new CircularPagerAdapter(getFragmentManager());
@@ -37,11 +34,8 @@ public class LiquidManager extends Activity {
         mainPager.setCurrentItem(2);
         mainPager.setOffscreenPageLimit(4);
         mainPager.setOnPageChangeListener(onPageChangeListener);
-        Intent serviceSmsMms = new Intent(context, SmsMmsService.class);
-        Cursor cursor = getContentResolver().query(ContactProvider.contactUri, null, null, null, null);
-
-
     }
+
 
 
           OnPageChangeListener  onPageChangeListener = new OnPageChangeListener() {
@@ -55,7 +49,7 @@ public class LiquidManager extends Activity {
             public void onPageScrolled(int pageSelected, float positionOffset, int positionOffsetPixel) {
 
                 Log.e("onPageScrolled", "pageSelected" + pageSelected + ",positionOffset:" + positionOffset + ",positionOffsetPixel:" + positionOffsetPixel);
-                currentState = mainPager.getCurrentItem();
+                int currentState = mainPager.getCurrentItem();
 
                if (currentState == 0 && positionOffset < .1){
                    mainPager.setCurrentItem(3, false);
