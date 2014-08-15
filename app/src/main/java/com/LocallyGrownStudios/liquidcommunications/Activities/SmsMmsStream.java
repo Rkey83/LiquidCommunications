@@ -114,17 +114,19 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
         sendBtn.setOnClickListener(this);
 
         if (extras != null) {
+
             textSender = extras.getString("senderNumber");
-            textName = extras.getString("senderName");
             textThread = extras.getString("threadID");
+            textName = extras.getString("senderName");
+
         }
 
         ContentValues updateValues = new ContentValues();
         textSender = Converters.stripNumberFormatiing(textSender);
         String covnersationNumber = Converters.formatPhoneNumber(textSender);
         streamNumber.setText(covnersationNumber);
-        cursorSms = context.getContentResolver().query(SmsProvider.smsUri, null, "LQ_Thread_ID=" + textThread , null, "LQ_id" + " ASC");
-        cursorMms = context.getContentResolver().query(MmsProvider.mmsUri, null, "LQ_Thread_ID=" + textThread , null, "LQ_id" + " ASC");
+        cursorSms = context.getContentResolver().query(SmsProvider.smsUri, null, "LQ_Number=" + textSender , null, "LQ_id" + " ASC");
+        cursorMms = context.getContentResolver().query(MmsProvider.mmsUri, null, "LQ_Number=" + textSender , null, "LQ_id" + " ASC");
 
         mmsCount = cursorMms.getCount();
         smsCount = cursorSms.getCount();
@@ -148,7 +150,8 @@ public class SmsMmsStream extends Activity implements View.OnClickListener {
 
                         getMms();
                         cursorSms.moveToPrevious();
-                        if (cursorMms.getPosition() < mmsCount){
+                        int position = cursorMms.getPosition();
+                        if (position <= mmsCount - 1){
 
                             cursorMms.moveToNext();
                         }
